@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجري المجاني</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        .product-card { background: white; padding: 20px; border-radius: 10px; max-width: 400px; margin: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        input, select, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { background-color: #25D366; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #128C7E; }
+    </style>
+</head>
+<body>
+
+<div class="product-card">
+    <h2>طلب منتج جديد</h2>
+    <label>اختر المنتج:</label>
+    <select id="product">
+        <option value="ساعة ذكية - 50$">ساعة ذكية - 50$</option>
+        <option value="سماعات لاسلكية - 30$">سماعات لاسلكية - 30$</option>
+    </select>
+
+    <label>الاسم الكامل:</label>
+    <input type="text" id="name" placeholder="أدخل اسمك الشامل">
+
+    <label>العنوان:</label>
+    <input type="text" id="address" placeholder="المدينة / المنطقة / الشارع">
+
+    <label>رقم الهاتف:</label>
+    <input type="tel" id="phone" placeholder="07xxxxxxxxx">
+
+    <button onclick="sendToWhatsApp()">إرسال الطلب عبر واتساب</button>
+</div>
+
+<script>
+    function sendToWhatsApp() {
+        const phoneNumber = "9647XXXXXXXX"; // اكتب رقمك هنا مع رمز الدولة بدون أصفار أو علامة +
+        const product = document.getElementById('product').value;
+        const name = document.getElementById('name').value;
+        const address = document.getElementById('address').value;
+        const phone = document.getElementById('phone').value;
+
+        if(name === "" || address === "" || phone === "") {
+            alert("يرجى ملء جميع الحقول!");
+            return;
+        }
+
+        const message = `*طلب شراء جديد*%0A%0A` +
+                        `*المنتج:* ${product}%0A` +
+                        `*الاسم:* ${name}%0A` +
+                        `*العنوان:* ${address}%0A` +
+                        `*الهاتف:* ${phone}`;
+
+        const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+        
+        window.open(whatsappURL, '_blank').focus();
+    }
+</script>
+
+</body>
+</html>
