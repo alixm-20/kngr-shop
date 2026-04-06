@@ -3,96 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر كنجر - KNGR Shop</title>
+    <title>متجر كنغر - حزام تصحيح الاستقامة</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f4f7f6; font-family: 'Segoe UI', sans-serif; }
-        .navbar { background-color: #2c3e50; color: white; padding: 1rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-        .product-card { border: none; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; background: white; }
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-        .price-tag { color: #e74c3c; font-weight: bold; font-size: 1.2rem; }
-        .btn-whatsapp { background-color: #25D366; color: white; border-radius: 50px; font-weight: bold; padding: 10px 20px; border: none; width: 100%; }
-        .btn-whatsapp:hover { background-color: #128c7e; color: white; }
-        .modal-content { border-radius: 20px; border: none; }
+        body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .navbar { background-color: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .main-container { max-width: 800px; margin: 30px auto; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .product-title { color: #2c3e50; font-weight: bold; margin-bottom: 10px; }
+        .price-tag { color: #e74c3c; font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; }
+        .img-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+        .img-grid img { width: 100%; border-radius: 10px; cursor: pointer; transition: 0.3s; border: 1px solid #ddd; }
+        .img-grid img:hover { opacity: 0.8; transform: scale(1.02); }
+        .btn-buy { background-color: #25D366; color: white; border: none; padding: 15px; width: 100%; border-radius: 50px; font-size: 1.2rem; font-weight: bold; transition: 0.3s; }
+        .btn-buy:hover { background-color: #128c7e; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
+        .modal-content { border-radius: 25px; border: none; padding: 20px; }
+        .form-control { border-radius: 10px; padding: 12px; margin-bottom: 15px; border: 1px solid #eee; }
     </style>
 </head>
 <body>
 
-<nav class="navbar mb-4 justify-content-center">
-    <span class="h3 m-0">🛍️ متجر كنغر - KNGR Shop</span>
+<nav class="navbar">
+    <div class="container">
+        <span class="h4 m-0">🛍️ متجر كنجر - KNGR Shop</span>
+    </div>
 </nav>
 
 <div class="container">
-    <div class="row g-4">
-        <div class="col-6 col-md-4">
-            <div class="card product-card p-2">
-                <img src="hezam.jpg" class="card-img p-2" style="border-radius: 20px;" alt="منتج">
-                <div class="card-body text-center">
-                    <h5 class="card-title">اسم المنتج هنا</h5>
-                    <p class="price-tag">25,000 د.ع</p>
-                    <button class="btn btn-whatsapp" onclick="openOrderModal('حزام دعم وتصحيح استقامة الظهر والكتفين الطبي', '17,000 د.ع')">شراء الآن</button>
-                </div>
-            </div>
+    <div class="main-container">
+        <h2 class="product-title text-center">حزام دعم وتصحيح استقامة الظهر والكتفين الطبي</h2>
+        <p class="price-tag text-center">16,000 د.ع</p>
+
+        <div class="img-grid">
+            <img src="hezam.jpg" alt="صورة 1">
+            <img src="hezam1.jpg" alt="صورة 2">
+            <img src="hezam2.jpg" alt="صورة 3">
+            <img src="hezam3.jpg" alt="صورة 4">
+            <img src="hezam4.jpg" alt="صورة 5">
+            <img src="hezam5.jpg" alt="صورة 6">
         </div>
+
+        <div class="text-center">
+            <p class="text-muted">حزام طبي عالي الجودة يساعد في تحسين وضعية الجلوس والوقوف وتخفيف آلام الظهر.</p>
+            <button class="btn-buy" onclick="openOrderModal()">اطلب الآن عبر واتساب ✅</button>
         </div>
+    </div>
 </div>
 
 <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content p-4">
-        <h4 class="text-center mb-4">تأكيد طلب الشراء</h4>
-        <div class="mb-3">
-            <label class="form-label">الاسم الكامل:</label>
-            <input type="text" id="custName" class="form-control" placeholder="اكتب اسمك هنا">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">عنوان السكن:</label>
-            <input type="text" id="custAddress" class="form-control" placeholder="المحافظة / المنطقة / أقرب نقطة دالة">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">رقم الهاتف:</label>
-            <input type="tel" id="custPhone" class="form-control" placeholder="07XXXXXXXX">
-        </div>
-        <button class="btn btn-success w-100 py-2 fs-5" onclick="sendOrder()">إرسال الطلب عبر واتساب ✅</button>
+    <div class="modal-content">
+        <h3 class="text-center mb-4">تفاصيل طلب الشراء</h3>
+        <input type="text" id="name" class="form-control" placeholder="الاسم الكامل">
+        <input type="text" id="address" class="form-control" placeholder="العنوان (المحافظة والمنطقة)">
+        <input type="tel" id="phone" class="form-control" placeholder="رقم الهاتف للتواصل">
+        <button class="btn btn-success w-100 py-3 rounded-pill fw-bold" onclick="sendToWhatsApp()">إرسال الطلب</button>
     </div>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    let currentItem = "";
-    const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
+    const modal = new bootstrap.Modal(document.getElementById('orderModal'));
 
-    function openOrderModal(name, price) {
-        currentItem = name + " (" + price + ")";
-        orderModal.show();
+    function openOrderModal() {
+        modal.show();
     }
 
-    function sendOrder() {
-        const name = document.getElementById('custName').value;
-        const address = document.getElementById('custAddress').value;
-        const phone = document.getElementById('custPhone').value;
+    function sendToWhatsApp() {
+        const name = document.getElementById('name').value;
+        const address = document.getElementById('address').value;
+        const phone = document.getElementById('phone').value;
         
-        // هام جداً: استبدل الرقم أدناه برقم الواتساب الخاص بك (بدون + وبدون أصفار في البداية)
-        const myWhatsApp = "9647741847123"; 
+        // رقم الواتساب الخاص بك مع رمز الدولة
+        const myNum = "9647741847123"; 
 
         if(!name || !address || !phone) {
-            alert("أخي العزيز، يرجى ملء جميع الحقول لنتمكن من توصيل الطلب.");
+            alert("لطفاً، املأ جميع المعلومات لنتمكن من معالجة طلبك.");
             return;
         }
 
-        const message = `*طلب شراء جديد من متجر كنغر*%0A` +
-                        `--------------------------%0A` +
-                        `*المنتج:* ${currentItem}%0A` +
-                        `*الاسم:* ${name}%0A` +
-                        `*العنوان:* ${address}%0A` +
-                        `*الهاتف:* ${phone}%0A` +
-                        `--------------------------%0A` +
-                        `يرجى تأكيد الطلب معي.`;
-        
-        const url = `https://wa.me/${myWhatsApp}?text=${message}`;
-        window.open(url, '_blank');
+        const msg = `*طلب شراء جديد من متجر كنجر*%0A` +
+                    `----------------------------%0A` +
+                    `*المنتج:* حزام تصحيح استقامة الظهر الطبي%0A` +
+                    `*السعر:* 16,000 د.ع%0A` +
+                    `*اسم الزبون:* ${name}%0A` +
+                    `*العنوان:* ${address}%0A` +
+                    `*الهاتف:* ${phone}%0A` +
+                    `----------------------------%0A` +
+                    `يرجى التواصل معي لإتمام التوصيل.`;
+
+        window.open(`https://wa.me/${myNum}?text=${msg}`, '_blank');
     }
 </script>
+
 </body>
 </html>
