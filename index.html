@@ -3,61 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجري المجاني</title>
+    <title>متجر كنجر - KNGR Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
-        .product-card { background: white; padding: 20px; border-radius: 10px; max-width: 400px; margin: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        input, select, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
-        button { background-color: #25D366; color: white; border: none; cursor: pointer; font-weight: bold; }
-        button:hover { background-color: #128C7E; }
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', sans-serif; }
+        .navbar { background-color: #2c3e50; color: white; padding: 1rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .product-card { border: none; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; background: white; }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .price-tag { color: #e74c3c; font-weight: bold; font-size: 1.2rem; }
+        .btn-whatsapp { background-color: #25D366; color: white; border-radius: 50px; font-weight: bold; padding: 10px 20px; border: none; width: 100%; }
+        .btn-whatsapp:hover { background-color: #128c7e; color: white; }
+        .modal-content { border-radius: 20px; border: none; }
     </style>
 </head>
 <body>
 
-<div class="product-card">
-    <h2>طلب منتج جديد</h2>
-    <label>اختر المنتج:</label>
-    <select id="product">
-        <option value="ساعة ذكية - 50$">ساعة ذكية - 50$</option>
-        <option value="سماعات لاسلكية - 30$">سماعات لاسلكية - 30$</option>
-    </select>
+<nav class="navbar mb-4 justify-content-center">
+    <span class="h3 m-0">🛍️ متجر كنغر - KNGR Shop</span>
+</nav>
 
-    <label>الاسم الكامل:</label>
-    <input type="text" id="name" placeholder="أدخل اسمك الشامل">
-
-    <label>العنوان:</label>
-    <input type="text" id="address" placeholder="المدينة / المنطقة / الشارع">
-
-    <label>رقم الهاتف:</label>
-    <input type="tel" id="phone" placeholder="07xxxxxxxxx">
-
-    <button onclick="sendToWhatsApp()">إرسال الطلب عبر واتساب</button>
+<div class="container">
+    <div class="row g-4">
+        <div class="col-6 col-md-4">
+            <div class="card product-card p-2">
+                <img src="https://via.placeholder.com/300" class="card-img p-2" style="border-radius: 20px;" alt="منتج">
+                <div class="card-body text-center">
+                    <h5 class="card-title">اسم المنتج هنا</h5>
+                    <p class="price-tag">25,000 د.ع</p>
+                    <button class="btn btn-whatsapp" onclick="openOrderModal('اسم المنتج هنا', '25,000 د.ع')">شراء الآن</button>
+                </div>
+            </div>
+        </div>
+        </div>
 </div>
 
-<script>
-    function sendToWhatsApp() {
-        const phoneNumber = "9647XXXXXXXX"; // اكتب رقمك هنا مع رمز الدولة بدون أصفار أو علامة +
-        const product = document.getElementById('product').value;
-        const name = document.getElementById('name').value;
-        const address = document.getElementById('address').value;
-        const phone = document.getElementById('phone').value;
+<div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4">
+        <h4 class="text-center mb-4">تأكيد طلب الشراء</h4>
+        <div class="mb-3">
+            <label class="form-label">الاسم الكامل:</label>
+            <input type="text" id="custName" class="form-control" placeholder="اكتب اسمك هنا">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">عنوان السكن:</label>
+            <input type="text" id="custAddress" class="form-control" placeholder="المحافظة / المنطقة / أقرب نقطة دالة">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">رقم الهاتف:</label>
+            <input type="tel" id="custPhone" class="form-control" placeholder="07XXXXXXXX">
+        </div>
+        <button class="btn btn-success w-100 py-2 fs-5" onclick="sendOrder()">إرسال الطلب عبر واتساب ✅</button>
+    </div>
+  </div>
+</div>
 
-        if(name === "" || address === "" || phone === "") {
-            alert("يرجى ملء جميع الحقول!");
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let currentItem = "";
+    const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
+
+    function openOrderModal(name, price) {
+        currentItem = name + " (" + price + ")";
+        orderModal.show();
+    }
+
+    function sendOrder() {
+        const name = document.getElementById('custName').value;
+        const address = document.getElementById('custAddress').value;
+        const phone = document.getElementById('custPhone').value;
+        
+        // هام جداً: استبدل الرقم أدناه برقم الواتساب الخاص بك (بدون + وبدون أصفار في البداية)
+        const myWhatsApp = "9647XXXXXXXX"; 
+
+        if(!name || !address || !phone) {
+            alert("أخي العزيز، يرجى ملء جميع الحقول لنتمكن من توصيل الطلب.");
             return;
         }
 
-        const message = `*طلب شراء جديد*%0A%0A` +
-                        `*المنتج:* ${product}%0A` +
+        const message = `*طلب شراء جديد من متجر كنغر*%0A` +
+                        `--------------------------%0A` +
+                        `*المنتج:* ${currentItem}%0A` +
                         `*الاسم:* ${name}%0A` +
                         `*العنوان:* ${address}%0A` +
-                        `*الهاتف:* ${phone}`;
-
-        const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+                        `*الهاتف:* ${phone}%0A` +
+                        `--------------------------%0A` +
+                        `يرجى تأكيد الطلب معي.`;
         
-        window.open(whatsappURL, '_blank').focus();
+        const url = `https://wa.me/${myWhatsApp}?text=${message}`;
+        window.open(url, '_blank');
     }
 </script>
-
 </body>
 </html>
