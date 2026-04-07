@@ -3,255 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر كنجر - حزام تصحيح الاستقامة</title>
+    <title>متجر كنغر - KNGR Shop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* إعدادات الخلفية العامة */
-        body { 
-            background: linear-gradient(135deg, #e0f2f1 0%, #ffffff 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            color: #333;
-        }
+        :root { --primary: #2c3e50; --accent: #25D366; }
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; color: #333; }
+        
+        /* الهيدر */
+        .navbar { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 15px 0; }
+        .navbar-brand { font-weight: 800; color: var(--primary) !important; font-size: 1.5rem; }
 
-        /* شريط التنقل الزجاجي (Navbar with Blur) */
-        .navbar {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        /* بطاقة المنتج في الواجهة */
+        .product-item { 
+            background: white; border-radius: 20px; overflow: hidden; 
+            transition: 0.3s; border: 1px solid #eee; cursor: pointer;
+            max-width: 300px; margin: auto;
         }
-        .navbar-brand {
-            font-weight: 800;
-            color: #2c3e50 !important;
-            font-size: 1.5rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-        }
+        .product-item:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .product-img-wrapper { height: 250px; overflow: hidden; background: #fdfdfd; display: flex; align-items: center; justify-content: center; }
+        .product-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .product-info { padding: 20px; text-align: center; }
+        .product-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: var(--primary); }
+        .price { color: #e74c3c; font-weight: 800; font-size: 1.2rem; }
 
-        /* الحاوية الرئيسية (بطاقة المنتج الزجاجية) */
-        .main-container {
-            max-width: 900px;
-            margin: 4rem auto;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            padding: 2.5rem;
-            transition: all 0.4s ease;
-        }
-        .main-container:hover {
-            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-            transform: translateY(-5px);
-        }
+        /* نافذة تفاصيل المنتج (Pop-up) */
+        .modal-content { border-radius: 30px; border: none; overflow: hidden; }
+        .details-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
+        .details-gallery img { width: 100%; border-radius: 10px; cursor: pointer; border: 2px solid transparent; }
+        .details-gallery img:hover { border-color: var(--accent); }
+        .main-detail-img { width: 100%; border-radius: 20px; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 
-        /* تنسيق النصوص والأسعار */
-        .product-title {
-            color: #1a252f;
-            font-weight: 800;
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
+        .btn-whatsapp { 
+            background: var(--accent); color: white; border: none; padding: 15px; 
+            width: 100%; border-radius: 15px; font-weight: 800; font-size: 1.1rem;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            margin-top: 20px; transition: 0.3s;
         }
-        .text-muted-custom {
-            color: #7f8c8d;
-            font-size: 1rem;
-            margin-bottom: 2rem;
-        }
-        .price-tag {
-            background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 2rem;
-        }
+        .btn-whatsapp:hover { background: #128c7e; color: white; transform: scale(1.02); }
 
-        /* شبكة الصور (Gallery with Hover Effects) */
-        .img-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 2.5rem;
-        }
-        @media (max-width: 768px) {
-            .img-grid { grid-template-columns: repeat(2, 1fr); }
-            .product-title { font-size: 1.8rem; }
-        }
-        .img-grid img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            border: 2px solid rgba(0,0,0,0.05);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
-        }
-        .img-grid img:hover {
-            transform: scale(1.08) rotate(1deg);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            border-color: rgba(39, 174, 96, 0.3);
-        }
-
-        /* زر الشراء النبّاض (Pulsating Whatsapp Button) */
-        .btn-buy {
-            background: linear-gradient(45deg, #25D366, #128c7e);
-            color: white;
-            border: none;
-            padding: 1.2rem;
-            width: 100%;
-            border-radius: 15px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
-        }
-        .btn-buy:hover {
-            transform: scale(1.03);
-            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
-        }
-        /* تأثير النبض لزر الشراء */
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-        .btn-buy { animation: pulse 2s infinite; }
-
-        /* نافذة الطلب (Modal) */
-        .modal-content {
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            padding: 2.5rem;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        }
-        .modal-header, .modal-footer { border: none; padding: 0; }
-        .modal-title { color: #2c3e50; font-weight: 800; }
-        .form-label { color: #34495e; font-weight: 600; margin-bottom: 0.5rem; }
-        .form-control-custom {
-            border-radius: 12px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border: 2px solid #edf2f7;
-            background-color: white;
-            color: #333;
-            transition: all 0.2s;
-        }
-        .form-control-custom:focus {
-            outline: none;
-            border-color: rgba(39, 174, 96, 0.5);
-            box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.1);
-        }
-
-        /* الفوتر (Footer) */
-        footer {
-            margin-top: auto;
-            padding: 1.5rem 0;
-            background: #2c3e50;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            text-align: center;
-        }
+        .badge-sale { position: absolute; top: 15px; right: 15px; background: #e74c3c; color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-light">
+<nav class="navbar mb-5">
     <div class="container justify-content-center">
-        <a class="navbar-brand" href="#">🛍️ מתجر كنجر - KNGR Shop</a>
+        <a class="navbar-brand" href="#">🛍️ متجر كنغر</a>
     </div>
 </nav>
 
 <div class="container">
-    <div class="main-container text-center">
-        <h1 class="product-title">حزام دعم وتصحيح استقامة الظهر والكتفين الطبي</h1>
-        <p class="text-muted-custom">تحسين وضعية الجسم وتخفيف الآلام بلمسة واحدة</p>
-        
-        <p class="price-tag"><i class="fas fa-tag fa-sm me-2"></i>16,000 د.ع</p>
-
-        <div class="img-grid">
-            <img src="hezam.jpg" alt="صورة الحزام الطبي 1">
-            <img src="hezam1.jpg" alt="صورة الحزام الطبي 2">
-            <img src="hezam2.jpg" alt="صورة الحزام الطبي 3">
-            <img src="hezam3.jpg" alt="صورة الحزام الطبي 4">
-            <img src="hezam4.jpg" alt="صورة الحزام الطبي 5">
-            <img src="hezam5.jpg" alt="صورة الحزام الطبي 6">
-        </div>
-
-        <div>
-            <p class="text-muted mb-5">حزام طبي عالي الجودة مصمم لراحة تامة، يساعد على تحسين استقامة العمود الفقري وتخفيف التوتر في العضلات.</p>
-            <button class="btn-buy" onclick="openOrderModal()">
-                <i class="fab fa-whatsapp"></i> اطلب الآن عبر واتساب ✅
-            </button>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="product-item" onclick="showDetails()">
+                <div class="product-img-wrapper position-relative">
+                    <span class="badge-sale">الأكثر مبيعاً</span>
+                    <img src="hezam.jpg" alt="حزام الظهر">
+                </div>
+                <div class="product-info">
+                    <h3>حزام تصحيح استقامة الظهر الطبي</h3>
+                    <div class="price">16,000 د.ع</div>
+                    <p class="text-muted small mt-2">اضغط للتفاصيل والصور <i class="fas fa-arrow-left"></i></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<footer>
-    <div class="container">
-        &copy; 2023 متجر كنجر (KNGR Shop). جميع الحقوق محفوظة.
-    </div>
-</footer>
-
-<div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
-        <div class="modal-header">
-            <h3 class="modal-title">تفاصيل طلب الشراء</h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-body p-4 p-md-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="hezam.jpg" id="mainImg" class="main-detail-img" alt="hezam.jpg">
+                <div class="details-gallery">
+                    <img src="hezam.jpg" onclick="changeImg('hezam.jpg')">
+                    <img src="hezam1.jpg" onclick="changeImg('hezam1.jpg')">
+                    <img src="hezam2.jpg" onclick="changeImg('hezam2.jpg')">
+                    <img src="hezam3.jpg" onclick="changeImg('hezam3.jpg')">
+                    <img src="hezam4.jpg" onclick="changeImg('hezam4.jpg')">
+                    <img src="hezam5.jpg" onclick="changeImg('hezam5.jpg')">
+                </div>
+            </div>
+            <div class="col-md-6 mt-4 mt-md-0">
+                <button type="button" class="btn-close float-end" data-bs-dismiss="modal"></button>
+                <h2 class="fw-bold mb-3">حزام دعم وتصحيح الظهر الطبي</h2>
+                <div class="price mb-4">16,000 د.ع</div>
+                <p class="text-muted">حزام طبي متطور يعمل على سحب الكتفين للخلف وتصحيح انحناء العمود الفقري. مناسب للارتداء تحت الملابس ومريح جداً للاستخدام اليومي.</p>
+                
+                <hr>
+                
+                <div class="mt-4">
+                    <label class="form-label fw-bold">الاسم الكامل:</label>
+                    <input type="text" id="uName" class="form-control mb-3" placeholder="اكتب اسمك هنا">
+                    
+                    <label class="form-label fw-bold">العنوان التفصيلي:</label>
+                    <input type="text" id="uAddress" class="form-control mb-3" placeholder="المحافظة / المنطقة">
+                    
+                    <label class="form-label fw-bold">رقم الهاتف:</label>
+                    <input type="tel" id="uPhone" class="form-control mb-3" placeholder="07xxxxxxxxx">
+                    
+                    <button class="btn-whatsapp" onclick="sendOrder()">
+                        <i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body text-start mt-4">
-            <div class="mb-1">
-                <label for="name" class="form-label">الاسم الكامل</label>
-                <input type="text" id="name" class="form-control-custom" placeholder="ادخل اسمك هنا">
-            </div>
-            <div class="mb-1">
-                <label for="address" class="form-label">العنوان (المحافظة والمنطقة)</label>
-                <input type="text" id="address" class="form-control-custom" placeholder="ادخل عنوانك بالتفصيل">
-            </div>
-            <div class="mb-1">
-                <label for="phone" class="form-label">رقم الهاتف للتواصل</label>
-                <input type="tel" id="phone" class="form-control-custom" placeholder="ادخل رقم هاتفك">
-            </div>
-            <button class="btn-buy mt-4" onclick="sendToWhatsApp()">
-                <i class="fab fa-whatsapp"></i> إرسال الطلب
-            </button>
-        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const modal = new bootstrap.Modal(document.getElementById('orderModal'));
+    const detailsModal = new bootstrap.Modal(document.getElementById('detailsModal'));
 
-    function openOrderModal() { modal.show(); }
+    function showDetails() { detailsModal.show(); }
 
-    function sendToWhatsApp() {
-        const name = document.getElementById('name').value;
-        const address = document.getElementById('address').value;
-        const phone = document.getElementById('phone').value;
-        const myNum = "9647741847123"; // رقم الواتساب الخاص بك
+    function changeImg(src) { document.getElementById('mainImg').src = src; }
 
-        if(!name || !address || !phone) {
-            alert("لطفاً، املأ جميع المعلومات لنتمكن من معالجة طلبك.");
+    function sendOrder() {
+        const name = document.getElementById('uName').value;
+        const addr = document.getElementById('uAddress').value;
+        const phone = document.getElementById('uPhone').value;
+        const myWhatsApp = "9647741847123";
+
+        if(!name || !addr || !phone) {
+            alert("كمل كل المعلومات ");
             return;
         }
 
-        const msg = `*طلب شراء جديد من مت
+        const msg = `*طلب جديد من المتجر*%0A` +
+                    `*المنتج:* حزام تصحيح الاستقامة%0A` +
+                    `*السعر:* 16,000 د.ع%0A` +
+                    `*الاسم:* ${name}%0A` +
+                    `*العنوان:* ${addr}%0A` +
+                    `*الهاتف:* ${phone}`;
+
+        window.open(`https://wa.me/${myWhatsApp}?text=${msg}`, '_blank');
+    }
+</script>
+</body>
+</html>
