@@ -7,143 +7,41 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #2c3e50; --accent: #25D366; }
-        body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; color: #333; }
-        
-        /* الهيدر */
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; }
         .navbar { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 15px 0; }
-        .navbar-brand { font-weight: 800; color: var(--primary) !important; font-size: 1.5rem; }
-
-        /* بطاقة المنتج في الواجهة */
-        .product-item { 
+        .navbar-brand { font-weight: 800; color: #2c3e50 !important; font-size: 1.5rem; }
+        .product-card { 
             background: white; border-radius: 20px; overflow: hidden; 
-            transition: 0.3s; border: 1px solid #eee; cursor: pointer;
-            max-width: 300px; margin: auto;
+            transition: 0.3s; border: 1px solid #eee; text-decoration: none; color: inherit;
+            display: block; max-width: 350px; margin: 40px auto;
         }
-        .product-item:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-        .product-img-wrapper { height: 250px; overflow: hidden; background: #fdfdfd; display: flex; align-items: center; justify-content: center; }
-        .product-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        .product-info { padding: 20px; text-align: center; }
-        .product-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: var(--primary); }
-        .price { color: #e74c3c; font-weight: 800; font-size: 1.2rem; }
-
-        /* نافذة تفاصيل المنتج (Pop-up) */
-        .modal-content { border-radius: 30px; border: none; overflow: hidden; }
-        .details-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
-        .details-gallery img { width: 100%; border-radius: 10px; cursor: pointer; border: 2px solid transparent; }
-        .details-gallery img:hover { border-color: var(--accent); }
-        .main-detail-img { width: 100%; border-radius: 20px; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-
-        .btn-whatsapp { 
-            background: var(--accent); color: white; border: none; padding: 15px; 
-            width: 100%; border-radius: 15px; font-weight: 800; font-size: 1.1rem;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            margin-top: 20px; transition: 0.3s;
-        }
-        .btn-whatsapp:hover { background: #128c7e; color: white; transform: scale(1.02); }
-
-        .badge-sale { position: absolute; top: 15px; right: 15px; background: #e74c3c; color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .img-wrapper { height: 300px; background: #fdfdfd; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .info { padding: 20px; text-align: center; }
+        .price { color: #e74c3c; font-weight: 800; font-size: 1.3rem; }
     </style>
 </head>
 <body>
 
-<nav class="navbar mb-5">
+<nav class="navbar">
     <div class="container justify-content-center">
         <a class="navbar-brand" href="#">🛍️ متجر كنغر</a>
     </div>
 </nav>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="product-item" onclick="showDetails()">
-                <div class="product-img-wrapper position-relative">
-                    <span class="badge-sale">الأكثر مبيعاً</span>
-                    <img src="hezam.jpg" alt="حزام الظهر">
-                </div>
-                <div class="product-info">
-                    <h3>حزام تصحيح استقامة الظهر الطبي</h3>
-                    <div class="price">16,000 د.ع</div>
-                    <p class="text-muted small mt-2">اضغط للتفاصيل والصور <i class="fas fa-arrow-left"></i></p>
-                </div>
-            </div>
+    <a href="product-details.html" class="product-card">
+        <div class="img-wrapper">
+            <img src="hezam.jpg" alt="حزام الظهر">
         </div>
-    </div>
+        <div class="info">
+            <h3>حزام تصحيح استقامة الظهر الطبي</h3>
+            <div class="price">16,000 د.ع</div>
+            <p class="text-muted small mt-2">اضغط لمشاهدة الصور والتفاصيل</p>
+        </div>
+    </a>
 </div>
 
-<div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body p-4 p-md-5">
-        <div class="row">
-            <div class="col-md-6">
-                <img src="hezam.jpg" id="mainImg" class="main-detail-img" alt="hezam.jpg">
-                <div class="details-gallery">
-                    <img src="hezam.jpg" onclick="changeImg('hezam.png')">
-                    <img src="hezam1.jpg" onclick="changeImg('hezam1.png')">
-                    <img src="hezam2.jpg" onclick="changeImg('hezam2.png')">
-                    <img src="hezam3.jpg" onclick="changeImg('hezam3.png')">
-                    <img src="hezam4.jpg" onclick="changeImg('hezam4.png')">
-                    <img src="hezam5.jpg" onclick="changeImg('hezam5.png')">
-                </div>
-            </div>
-            <div class="col-md-6 mt-4 mt-md-0">
-                <button type="button" class="btn-close float-end" data-bs-dismiss="modal"></button>
-                <h2 class="fw-bold mb-3">حزام دعم وتصحيح الظهر الطبي</h2>
-                <div class="price mb-4">16,000 د.ع</div>
-                <p class="text-muted">حزام طبي متطور يعمل على سحب الكتفين للخلف وتصحيح انحناء العمود الفقري. مناسب للارتداء تحت الملابس ومريح جداً للاستخدام اليومي.</p>
-                
-                <hr>
-                
-                <div class="mt-4">
-                    <label class="form-label fw-bold">الاسم الكامل:</label>
-                    <input type="text" id="uName" class="form-control mb-3" placeholder="اكتب اسمك هنا">
-                    
-                    <label class="form-label fw-bold">العنوان التفصيلي:</label>
-                    <input type="text" id="uAddress" class="form-control mb-3" placeholder="المحافظة / المنطقة">
-                    
-                    <label class="form-label fw-bold">رقم الهاتف:</label>
-                    <input type="tel" id="uPhone" class="form-control mb-3" placeholder="07xxxxxxxxx">
-                    
-                    <button class="btn-whatsapp" onclick="sendOrder()">
-                        <i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب
-                    </button>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    const detailsModal = new bootstrap.Modal(document.getElementById('detailsModal'));
-
-    function showDetails() { detailsModal.show(); }
-
-    function changeImg(src) { document.getElementById('mainImg').src = src; }
-
-    function sendOrder() {
-        const name = document.getElementById('uName').value;
-        const addr = document.getElementById('uAddress').value;
-        const phone = document.getElementById('uPhone').value;
-        const myWhatsApp = "9647741847123";
-
-        if(!name || !addr || !phone) {
-            alert("كمل كل المعلومات ");
-            return;
-        }
-
-        const msg = `*طلب جديد من المتجر*%0A` +
-                    `*المنتج:* حزام تصحيح الاستقامة%0A` +
-                    `*السعر:* 16,000 د.ع%0A` +
-                    `*الاسم:* ${name}%0A` +
-                    `*العنوان:* ${addr}%0A` +
-                    `*الهاتف:* ${phone}`;
-
-        window.open(`https://wa.me/${myWhatsApp}?text=${msg}`, '_blank');
-    }
-</script>
 </body>
 </html>
