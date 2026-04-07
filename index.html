@@ -11,7 +11,6 @@
         .navbar { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 15px 0; }
         .navbar-brand { font-weight: 800; color: #2c3e50 !important; font-size: 1.5rem; }
         
-        /* تنسيق بطاقة المنتج */
         .product-card { 
             background: white; border-radius: 20px; overflow: hidden; 
             transition: 0.3s; border: 1px solid #eee; text-decoration: none; color: inherit;
@@ -19,9 +18,9 @@
         }
         .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         .img-wrapper { height: 250px; background: #fdfdfd; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .img-wrapper img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
         .info { padding: 15px; text-align: center; }
-        .info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+        .info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; min-height: 50px; }
         .price { color: #e74c3c; font-weight: 800; font-size: 1.2rem; }
     </style>
 </head>
@@ -34,10 +33,13 @@
 </nav>
 
 <div class="container">
-    <div class="row g-4"> <div class="col-6 col-md-4 col-lg-3">
+    <div class="row g-4"> 
+        
+        <div class="col-6 col-md-4 col-lg-3">
             <a href="product-details.html" class="product-card">
                 <div class="img-wrapper">
-                    <img src="hezam.jpg" alt="حزام الظهر"> </div>
+                    <img src="hezam.jpg" alt="حزام الظهر"> 
+                </div>
                 <div class="info">
                     <h3>حزام تصحيح استقامة الظهر</h3>
                     <div class="price">16,000 د.ع</div>
@@ -49,30 +51,28 @@
         <div class="col-6 col-md-4 col-lg-3">
             <a href="product-2.html" class="product-card">
                 <div class="img-wrapper">
-                    <img src="teeth.png" alt="المنتج الجديد"> </div>
+                    <img src="teeth.png" alt="قلم مبيض الاسنان"> 
+                </div>
                 <div class="info">
-                    <h3>
-قلم مبيض الاسنان الفوري 2 قطعة</h3>
+                    <h3>قلم مبيض الاسنان الفوري 2 قطعة</h3>
                     <div class="price">16,000 د.ع</div>
                     <p class="text-muted small mt-2">عرض التفاصيل</p>
                 </div>
             </a>
         </div>
 
-        </div>
-</div>
-<div class="col-6 col-md-4 col-lg-3">
+        <div class="col-6 col-md-4 col-lg-3">
             <a href="projector.html" class="product-card">
                 <div class="img-wrapper">
                     <img src="projector.png" alt="بروجكتور"> 
                 </div>
                 <div class="info">
                     <h3>جهاز عرض (بروجكتر) ضوء القمر والارض</h3>
-                    <div class="price">السعر د.ع</div>
+                    <div class="price">18,000 د.ع</div>
                     <p class="text-muted small mt-2">عرض التفاصيل</p>
                 </div>
             </a>
         </div>
 
-</body>
+    </div> </div> </body>
 </html>
