@@ -17,21 +17,22 @@
             padding: 15px 0; 
         }
         
-        /* لون النص داخل المستطيل العلوي */
+        /* تنسيق العنوان الرئيسي */
         .navbar-brand { 
             font-weight: 800; 
             color: #ffffff !important; 
             font-size: 1.6rem; 
-            display: flex; /* لضمان محاذاة اللوجو مع النص */
-            align-items: center;
-            gap: 10px; /* مسافة بين اللوجو والاسم */
+            display: flex; 
+            align-items: center; /* توسيط عمودي مبدئي */
+            gap: 12px; 
         }
 
-        /* تنسيق اللوجو الجديد */
+        /* تنسيق اللوجو - تم تعديله لينزل للأسفل قليلاً */
         .brand-logo {
-            width: 50px; /* يمكنك تصغير أو تكبير اللوجو من هنا */
+            width: 45px; /* حجم مناسب جداً */
             height: auto;
-            border-radius: 5px; /* اختيارياً: لإضافة زوايا ناعمة للوجو */
+            border-radius: 5px;
+            margin-top: 8px; /* القيمة التي ستقوم بتنزيل اللوجو ليحاذي النص العربي */
         }
         
         .product-card { 
@@ -90,7 +91,7 @@
     <div class="container justify-content-center">
         <a class="navbar-brand" href="#">
             <img src="logo-web.png" alt="لوجو متجر كنغر" class="brand-logo">
-            متجر كنغر
+            <span>متجر كنغر</span>
         </a>
     </div>
 </nav>
