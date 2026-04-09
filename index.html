@@ -10,7 +10,7 @@
         /* اللون المطلوب لخلفية الصفحة */
         body { background-color: #efe3e3; font-family: 'Segoe UI', sans-serif; }
         
-        /* المستطيل العلوي باللون المطلوب */
+        /* المستطيل العلوي */
         .navbar { 
             background: #694551; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
@@ -22,6 +22,16 @@
             font-weight: 800; 
             color: #ffffff !important; 
             font-size: 1.6rem; 
+            display: flex; /* لضمان محاذاة اللوجو مع النص */
+            align-items: center;
+            gap: 10px; /* مسافة بين اللوجو والاسم */
+        }
+
+        /* تنسيق اللوجو الجديد */
+        .brand-logo {
+            width: 40px; /* يمكنك تصغير أو تكبير اللوجو من هنا */
+            height: auto;
+            border-radius: 5px; /* اختيارياً: لإضافة زوايا ناعمة للوجو */
         }
         
         .product-card { 
@@ -29,14 +39,13 @@
             border-radius: 20px; 
             overflow: hidden; 
             transition: 0.3s; 
-            border: 1px solid #dcc9c9; /* حدود ناعمة تتناسب مع الخلفية */
+            border: 1px solid #dcc9c9; 
             text-decoration: none; 
             color: inherit;
             display: block; 
             height: 100%;
         }
         
-        /* تأثير الظل عند تمرير الماوس بلون يتناسب مع الهوية الجديدة */
         .product-card:hover { 
             transform: translateY(-10px); 
             box-shadow: 0 15px 30px rgba(105, 69, 81, 0.2); 
@@ -58,11 +67,10 @@
             font-weight: 700; 
             margin-bottom: 10px; 
             min-height: 50px; 
-            color: #694551; /* جعل العنوان بنفس لون الهوية */
+            color: #694551; 
         }
         .price { color: #e74c3c; font-weight: 800; font-size: 1.2rem; }
         
-        /* تنسيق نص "عرض التفاصيل" */
         .view-details {
             display: inline-block;
             margin-top: 10px;
@@ -80,7 +88,10 @@
 
 <nav class="navbar mb-5">
     <div class="container justify-content-center">
-        <a class="navbar-brand" href="#">🛍️ متجر كنغر</a>
+        <a class="navbar-brand" href="#">
+            <img src="logo-web.png" alt="لوجو متجر كنغر" class="brand-logo">
+            متجر كنغر
+        </a>
     </div>
 </nav>
 
