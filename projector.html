@@ -8,17 +8,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { background-color: #efe3e3; font-family: 'Segoe UI', sans-serif; padding-bottom: 50px; }
-        .back-link { margin: 20px 0; display: inline-block; color: #694551; text-decoration: none; font-weight: bold; }
+        
+        /* زر العودة مع إضافة تأثير الحركة "الجميل" عند التمرير */
+        .back-link { 
+            margin: 20px 0; 
+            display: inline-block; 
+            color: #694551; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: all 0.3s ease; /* لجعل الحركة سلسة */
+        }
+        .back-link:hover { 
+            color: #4a3139; 
+            transform: translateX(-8px); /* هذه هي الحركة التي طلبتها */
+        }
+
         .product-container { background: white; border-radius: 25px; padding: 30px; box-shadow: 0 10px 30px rgba(105, 69, 81, 0.1); border: 1px solid #dcc9c9; }
         .main-display { width: 100%; border-radius: 20px; margin-bottom: 20px; height: 450px; object-fit: contain; background: #ffffff; border: 1px solid #eee; }
         .gallery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
-        .gallery-grid img { width: 100%; height: 70px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; }
+        .gallery-grid img { width: 100%; height: 70px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
         .gallery-grid img:hover { border-color: #694551; }
+        
         .price { color: #e74c3c; font-size: 2.5rem; font-weight: 800; }
-        .order-box { background: #fcf8f8; border-radius: 20px; padding: 25px; margin-top: 25px; border: 1px solid #dcc9c9; }
-        .btn-whatsapp { background: #25D366; color: white; padding: 15px; border-radius: 15px; width: 100%; border: none; font-weight: bold; font-size: 1.2rem; margin-top: 10px; }
-        .form-control { border-radius: 12px; padding: 12px; margin-bottom: 15px; border: 1px solid #dcc9c9; }
         .product-title { color: #694551; font-size: 2rem; }
+        
+        .order-box { background: #fcf8f8; border-radius: 20px; padding: 25px; margin-top: 25px; border: 1px solid #dcc9c9; }
+        .btn-whatsapp { background: #25D366; color: white; padding: 15px; border-radius: 15px; width: 100%; border: none; font-weight: bold; font-size: 1.2rem; margin-top: 10px; transition: 0.3s; }
+        .btn-whatsapp:hover { background: #1eb954; transform: translateY(-3px); }
+        
+        .form-control { border-radius: 12px; padding: 12px; margin-bottom: 15px; border: 1px solid #dcc9c9; }
     </style>
 </head>
 <body>
