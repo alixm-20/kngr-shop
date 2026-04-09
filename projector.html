@@ -7,16 +7,43 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; padding-bottom: 50px; }
-        .back-link { margin: 20px 0; display: inline-block; color: #2c3e50; text-decoration: none; font-weight: bold; }
-        .product-container { background: white; border-radius: 25px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .main-display { width: 100%; border-radius: 20px; margin-bottom: 20px; height: 450px; object-fit: contain; background: #fdfdfd; }
+        /* خلفية الموقع الكريمية الموحدة */
+        body { background-color: #efe3e3; font-family: 'Segoe UI', sans-serif; padding-bottom: 50px; }
+        
+        /* زر العودة بلون الهوية العنابي */
+        .back-link { margin: 20px 0; display: inline-block; color: #694551; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .back-link:hover { color: #4a3139; transform: translateX(-5px); }
+        
+        /* حاوية المنتج البيضاء بحدود ناعمة وظل خفيف */
+        .product-container { background: white; border-radius: 25px; padding: 30px; box-shadow: 0 10px 30px rgba(105, 69, 81, 0.1); border: 1px solid #dcc9c9; }
+        
+        .main-display { width: 100%; border-radius: 20px; margin-bottom: 20px; height: 450px; object-fit: contain; background: #ffffff; border: 1px solid #eee; }
+        
         .gallery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
-        .gallery-grid img { width: 100%; height: 70px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; }
-        .gallery-grid img:hover { border-color: #25D366; }
+        .gallery-grid img { width: 100%; height: 70px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
+        
+        /* لون التحديد عند اختيار الصورة يتبع الهوية */
+        .gallery-grid img:hover { border-color: #694551; }
+        
+        /* لون العنوان والسعر */
+        .product-title { color: #694551; font-weight: 800; }
         .price { color: #e74c3c; font-size: 2rem; font-weight: 800; }
-        .order-box { background: #f1f3f5; border-radius: 20px; padding: 25px; margin-top: 25px; }
-        .btn-whatsapp { background: #25D366; color: white; padding: 15px; border-radius: 15px; width: 100%; border: none; font-weight: bold; font-size: 1.2rem; }
+        
+        /* صندوق الطلب بتصميم متناسق */
+        .order-box { background: #fcf8f8; border-radius: 20px; padding: 25px; margin-top: 25px; border: 1px dashed #dcc9c9; }
+        
+        /* زر الواتساب الرسمي */
+        .btn-whatsapp { background: #25D366; color: white; padding: 15px; border-radius: 15px; width: 100%; border: none; font-weight: bold; font-size: 1.2rem; transition: 0.3s; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2); }
+        .btn-whatsapp:hover { background: #1eb954; transform: translateY(-3px); }
+
+        /* تنسيق حقول الإدخال */
+        .form-control { border-radius: 12px; border: 1px solid #dcc9c9; padding: 12px; }
+        .form-control:focus { border-color: #694551; box-shadow: 0 0 0 0.25rem rgba(105, 69, 81, 0.1); }
+
+        /* شريط التمرير للوصف */
+        .description-scroll { max-height: 250px; overflow-y: auto; padding-left: 10px; border-right: 3px solid #f1e4e4; padding-right: 15px; }
+        .description-scroll::-webkit-scrollbar { width: 5px; }
+        .description-scroll::-webkit-scrollbar-thumb { background: #694551; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -37,55 +64,18 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <h1 class="fw-bold text-dark">
-جهاز عرض (بروجكتر) ضوء القمر والارض</h1>
+                <h1 class="product-title fw-bold">جهاز عرض (بروجكتر) ضوء القمر والأرض</h1>
                 <div class="price my-4">18,000 د.ع</div>
-                <p class="text-muted">جهاز عرض (بروجكتر) ضوء القمر والارض
-
-المميزات:
-جودة ممتازة مع إضاءة RGB وتأثيرات الفضاء.
-
-يعرض الضوء على "الأرض والقمر" ويحتوي على عدستين إضافيتين
-
-مصنوع من الألمنيوم.
-
-يحتوي على منفذ USB Type-C للتشغيل.
-
-زر للتشغيل/الإيقاف.
-
-خرطوم قابل للتعديل بزاوية 360 درجة.
-
-الطاقة: 3 واط.
-
-أبعاد الغلاف: ارتفاع: 20 سم / طول: 7 سم / عرض: 6 سم.
-
-أبعاد المنتج: ارتفاع: 27 سم / عرض: 18 سم.</p>
                 
-                <div class="order-box">
-                    <h5 class="mb-3 fw-bold">معلومات الطلب:</h5>
-                    <input type="text" id="custName" class="form-control mb-3" placeholder="الاسم الكامل">
-                    <input type="text" id="custAddress" class="form-control mb-3" placeholder="العنوان (المحافظة والمنطقة)">
-                    <input type="tel" id="custPhone" class="form-control mb-3" placeholder="رقم الهاتف">
-                    <button class="btn-whatsapp" onclick="sendWhatsApp()">إرسال الطلب عبر واتساب ✅</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    function changeImage(src) { document.getElementById('mainImage').src = src; }
-    function sendWhatsApp() {
-        const name = document.getElementById('custName').value;
-        const addr = document.getElementById('custAddress').value;
-        const phone = document.getElementById('custPhone').value;
-        const whatsapp = "9647741847123";
-
-        if(!name || !addr || !phone) { alert("لازم تكمل المعلومات"); return; }
-
-        const message = `*طلب جديد من متجر كنغر*%0A*المنتج:* البروجكتور%0A*الاسم:* ${name}%0A*العنوان:* ${addr}%0A*الهاتف:* ${phone}`;
-        window.open(`https://wa.me/${whatsapp}?text=${message}`, '_blank');
-    }
-</script>
-</body>
-</html>
+                <div class="description-scroll text-muted mb-4">
+                    <h6 class="fw-bold text-dark"><i class="fas fa-star text-warning"></i> المميزات:</h6>
+                    <ul class="list-unstyled">
+                        <li>✅ جودة ممتازة مع إضاءة RGB وتأثيرات فضاء مذهلة.</li>
+                        <li>✅ يحتوي على عدستين إضافيتين (الأرض والقمر).</li>
+                        <li>✅ جسم متين مصنوع من الألمنيوم.</li>
+                        <li>✅ خرطوم مرن قابل للتعديل بزاوية 360 درجة.</li>
+                        <li>✅ يعمل بمنفذ USB Type-C (طاقة 3 واط).</li>
+                    </ul>
+                    
+                    <h6 class="fw-bold text-dark mt-3"><i class="fas fa-ruler-combined"></i> الأبعاد:</h6>
+                    <p>المنتج:
