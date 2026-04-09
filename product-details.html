@@ -7,16 +7,38 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; padding-bottom: 50px; }
-        .back-link { margin: 20px 0; display: inline-block; color: #2c3e50; text-decoration: none; font-weight: bold; }
-        .product-container { background: white; border-radius: 25px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .main-display { width: 100%; border-radius: 20px; margin-bottom: 20px; height: 450px; object-fit: contain; background: #fdfdfd; }
+        /* خلفية الموقع الكريمية */
+        body { background-color: #efe3e3; font-family: 'Segoe UI', sans-serif; padding-bottom: 50px; }
+        
+        /* زر العودة بلون الهوية العنابي */
+        .back-link { margin: 20px 0; display: inline-block; color: #694551; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .back-link:hover { color: #4a3139; transform: translateX(-5px); }
+        
+        /* حاوية المنتج البيضاء بحدود ناعمة */
+        .product-container { background: white; border-radius: 25px; padding: 30px; box-shadow: 0 10px 30px rgba(105, 69, 81, 0.1); border: 1px solid #dcc9c9; }
+        
+        .main-display { width: 100%; border-radius: 20px; margin-bottom: 20px; height: 450px; object-fit: contain; background: #ffffff; border: 1px solid #eee; }
+        
         .gallery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
-        .gallery-grid img { width: 100%; height: 70px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; }
-        .gallery-grid img:hover { border-color: #25D366; }
+        .gallery-grid img { width: 100%; height: 70px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
+        
+        /* لون التحديد عند اختيار صورة */
+        .gallery-grid img:hover { border-color: #694551; }
+        
+        /* لون العنوان والسعر */
+        .product-title { color: #694551; font-weight: 800; }
         .price { color: #e74c3c; font-size: 2rem; font-weight: 800; }
-        .order-box { background: #f1f3f5; border-radius: 20px; padding: 25px; margin-top: 25px; }
-        .btn-whatsapp { background: #25D366; color: white; padding: 15px; border-radius: 15px; width: 100%; border: none; font-weight: bold; font-size: 1.2rem; }
+        
+        /* صندوق الطلب بلون هادئ */
+        .order-box { background: #fcf8f8; border-radius: 20px; padding: 25px; margin-top: 25px; border: 1px dashed #dcc9c9; }
+        
+        /* زر الواتساب الأخضر مع الحفاظ على تناسقه */
+        .btn-whatsapp { background: #25D366; color: white; padding: 15px; border-radius: 15px; width: 100%; border: none; font-weight: bold; font-size: 1.2rem; transition: 0.3s; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2); }
+        .btn-whatsapp:hover { background: #1eb954; transform: translateY(-3px); }
+
+        /* تنسيق الحقول لتناسب الألوان */
+        .form-control { border-radius: 12px; border: 1px solid #dcc9c9; padding: 12px; }
+        .form-control:focus { border-color: #694551; box-shadow: 0 0 0 0.25rem rgba(105, 69, 81, 0.1); }
     </style>
 </head>
 <body>
@@ -38,56 +60,20 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <h1 class="fw-bold text-dark">حزام دعم وتصحيح استقامة الظهر والكتفين الطبي</h1>
+                <h1 class="product-title fw-bold">حزام دعم وتصحيح استقامة الظهر والكتفين الطبي</h1>
                 <div class="price my-4">16,000 د.ع</div>
-                <p class="text-muted">الاستخدامات
-تصحيح انحناء الظهر والكتفين.
-
-دعم العمود الفقري أثناء الجلوس الطويل أو العمل المكتبي.
-
-تقليل آلام الظهر والكتفين الناتجة عن الوضعية الخاطئة.
-
-مناسب للاستخدام اليومي في المنزل، العمل، أو أثناء التمارين الخفيفة.
-
-يساعد على تحسين المظهر العام واستقامة الجسم.
-
-المميزات
-تصميم Molded Compression داعم للظهر والخصر.
-
-أشرطة مطاطية متقاطعة خلفية لشد الكتفين للخلف بشكل تدريجي.
-
-قماش مرن ومريح وقابل للتنفس.
-
-حزام خصر مدمج لدعم إضافي لمنطقة أسفل الظهر.
-
-إغلاق فيلكرو قابل للتعديل حسب مقاس الجسم.
-
-يساعد على بناء "Muscle Memory" للحفاظ على الوضعية الصحيحة.
-
-موديل المنتج: YIMYZ-3003.
-
-بلد المنشأ: الصين.
-
-قياس الكيس: 18 × 22 × 4 سم.
-
-محتويات الصندوق
-حزام دعم الظهر.
-
-كيس تغليف بلاستيكي.
-
-الملاحظات
-يُفضل اختيار مقاس أكبر بدرجة من مقاس الملابس المعتاد.
-
-يُستخدم تدريجياً (1-7 أيام تأقلم، ثم زيادة الشد تدريجياً).
-
-يُغسل يدوياً بماء فاتر.
-
-لا يُستخدم داخل الغسالة أو المجفف.
-
-يُجفف في الظل..</p>
+                
+                <div style="max-height: 300px; overflow-y: auto; padding-right: 10px;" class="text-muted">
+                    <p><strong>الاستخدامات:</strong><br>
+                    تصحيح انحناء الظهر والكتفين، دعم العمود الفقري، وتقليل الآلام الناتجة عن الوضعية الخاطئة.</p>
+                    <p><strong>المميزات:</strong><br>
+                    تصميم Molded Compression، قماش قابل للتنفس، وإغلاق فيلكرو قابل للتعديل.</p>
+                    <p><strong>الملاحظات:</strong><br>
+                    يُفضل اختيار مقاس أكبر من المعتاد ويُغسل يدوياً.</p>
+                </div>
                 
                 <div class="order-box">
-                    <h5 class="mb-3 fw-bold">معلومات الطلب:</h5>
+                    <h5 class="mb-3 fw-bold" style="color: #694551;">معلومات الطلب:</h5>
                     <input type="text" id="custName" class="form-control mb-3" placeholder="الاسم الكامل">
                     <input type="text" id="custAddress" class="form-control mb-3" placeholder="العنوان (المحافظة والمنطقة)">
                     <input type="tel" id="custPhone" class="form-control mb-3" placeholder="رقم الهاتف">
