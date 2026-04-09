@@ -7,98 +7,88 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* اللون المطلوب لخلفية الصفحة */
         body { background-color: #efe3e3; font-family: 'Segoe UI', sans-serif; }
         
-        /* المستطيل العلوي */
         .navbar { 
             background: #694551; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
-            padding: 15px 0; 
+            padding: 10px 0; 
         }
         
-        /* تنسيق العنوان الرئيسي */
+        /* تنسيق الهوية واللوجو */
         .navbar-brand { 
             font-weight: 800; 
             color: #ffffff !important; 
-            font-size: 1.6rem; 
-            display: flex; 
-            align-items: center; /* توسيط عمودي مبدئي */
-            gap: 12px; 
-        }
-
-        /* تنسيق اللوجو - تم تعديله لينزل للأسفل قليلاً */
-        .brand-logo {
-            width: 45px; /* حجم مناسب جداً */
-            height: auto;
-            border-radius: 5px;
-            margin-top: 8px; /* القيمة التي ستقوم بتنزيل اللوجو ليحاذي النص العربي */
-        }
-        
-        .product-card { 
-            background: white; 
-            border-radius: 20px; 
-            overflow: hidden; 
-            transition: 0.3s; 
-            border: 1px solid #dcc9c9; 
-            text-decoration: none; 
-            color: inherit;
-            display: block; 
-            height: 100%;
-        }
-        
-        .product-card:hover { 
-            transform: translateY(-10px); 
-            box-shadow: 0 15px 30px rgba(105, 69, 81, 0.2); 
-        }
-        
-        .img-wrapper { 
-            height: 250px; 
-            background: #ffffff; 
+            font-size: 1.4rem; 
             display: flex; 
             align-items: center; 
-            justify-content: center; 
-            overflow: hidden; 
+            gap: 10px; 
+            margin: 0;
         }
-        .img-wrapper img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
-        
-        .info { padding: 15px; text-align: center; }
-        .info h3 { 
-            font-size: 1.1rem; 
-            font-weight: 700; 
-            margin-bottom: 10px; 
-            min-height: 50px; 
-            color: #694551; 
+
+        .brand-logo {
+            width: 40px; 
+            height: auto;
+            border-radius: 5px;
+            margin-top: 5px; 
         }
-        .price { color: #e74c3c; font-weight: 800; font-size: 1.2rem; }
-        
-        .view-details {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 5px 15px;
-            background-color: #694551;
-            color: white !important;
-            border-radius: 8px;
-            font-size: 0.85rem;
+
+        /* تنسيق أيقونات التواصل في الطرف */
+        .top-social-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .top-social-link {
+            color: #efe3e3; /* لون فاتح مثل لون الخلفية */
+            font-size: 1.3rem;
             transition: 0.3s;
+            text-decoration: none;
         }
-        .product-card:hover .view-details { background-color: #4a3139; }
+
+        .top-social-link:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+        
+        /* بقية التنسيقات */
+        .product-card { 
+            background: white; border-radius: 20px; overflow: hidden; 
+            transition: 0.3s; border: 1px solid #dcc9c9; text-decoration: none; 
+            color: inherit; display: block; height: 100%;
+        }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(105, 69, 81, 0.2); }
+        .img-wrapper { height: 250px; background: #ffffff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .img-wrapper img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
+        .info { padding: 15px; text-align: center; }
+        .info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; min-height: 50px; color: #694551; }
+        .price { color: #e74c3c; font-weight: 800; font-size: 1.2rem; }
+        .view-details { display: inline-block; margin-top: 10px; padding: 5px 15px; background-color: #694551; color: white !important; border-radius: 8px; font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
 <nav class="navbar mb-5">
-    <div class="container justify-content-center">
+    <div class="container d-flex justify-content-between align-items-center">
         <a class="navbar-brand" href="#">
             <img src="logo-web.png" alt="لوجو متجر كنغر" class="brand-logo">
             <span>متجر كنغر</span>
         </a>
+
+        <div class="top-social-links">
+            <a href="https://wa.me/9647741847123" class="top-social-link" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/kngr_shop" class="top-social-link" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
     </div>
 </nav>
 
 <div class="container mb-5">
     <div class="row g-4"> 
-        
         <div class="col-6 col-md-4 col-lg-3">
             <a href="product-details.html" class="product-card">
                 <div class="img-wrapper">
@@ -111,47 +101,7 @@
                 </div>
             </a>
         </div>
-
-        <div class="col-6 col-md-4 col-lg-3">
-            <a href="product-2.html" class="product-card">
-                <div class="img-wrapper">
-                    <img src="teeth.png" alt="قلم مبيض الاسنان"> 
-                </div>
-                <div class="info">
-                    <h3>قلم مبيض الاسنان الفوري 2 قطعة</h3>
-                    <div class="price">16,000 د.ع</div>
-                    <span class="view-details">عرض التفاصيل</span>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-6 col-md-4 col-lg-3">
-            <a href="projector.html" class="product-card">
-                <div class="img-wrapper">
-                    <img src="projector.png" alt="بروجكتور"> 
-                </div>
-                <div class="info">
-                    <h3>جهاز عرض (بروجكتر) ضوء القمر والارض</h3>
-                    <div class="price">18,000 د.ع</div>
-                    <span class="view-details">عرض التفاصيل</span>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-6 col-md-4 col-lg-3">
-            <a href="boxing.html" class="product-card">
-                <div class="img-wrapper">
-                    <img src="boxing.png" alt="تقوية قبضة اليد"> 
-                </div>
-                <div class="info">
-                    <h3>مجموعة تمارين تقوية قبضة اليد</h3>
-                    <div class="price">13,000 د.ع</div>
-                    <span class="view-details">عرض التفاصيل</span>
-                </div>
-            </a>
-        </div>
-
-    </div> 
+        </div> 
 </div>
 
 </body>
