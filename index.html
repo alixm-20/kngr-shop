@@ -9,7 +9,6 @@
     <style>
         body { background-color: #efe3e3; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
         
-        /* الهيدر العلوي */
         .navbar { 
             background: #694551; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
@@ -39,19 +38,19 @@
         .top-social-link:hover { color: #ffffff; transform: scale(1.1); }
 
         /* ========================================= */
-        /* أنيميشن الكنغر: بطيء، أنيق، وبفريمين فقط */
+        /* التعديل الجديد: الاندفاع أثناء القفز فقط */
         /* ========================================= */
         
         .kngr-animation-wrapper {
             position: absolute;
             top: 0;
-            left: -150px;
+            left: -150px; /* نقطة البداية */
             width: 80px; 
             height: 100%;
             display: flex;
             align-items: center;
-            /* تبطئة الحركة لـ 15 ثانية لجعلها هادئة */
-            animation: move-right 15s steps(60) infinite;
+            /* الآن الأنيميشن الرئيسي يتحكم في القفزة والتقدم معاً */
+            animation: kngr-jump-and-move 30s steps(100) infinite;
         }
 
         .kngr-sprite {
@@ -61,26 +60,48 @@
             background-repeat: no-repeat;
             background-position: center;
             image-rendering: pixelated;
-
-            /* ربط تبديل الفريمات مع القفزة بنفس التوقيت (1.2 ثانية) */
-            animation: 
-                play-two-frames 1.2s steps(1) infinite,
-                jump-slow 1.2s steps(2) infinite;
+            /* تبديل الفريمات */
+            animation: play-two-frames 1.5s steps(1) infinite;
         }
 
-        /* تبديل الفريمين فقط */
+        /* تبديل الفريمين: 0-50% (ثبات)، 50-100% (قفز) */
         @keyframes play-two-frames {
             0%, 49% { background-image: url('images/first.png'); }
             50%, 100% { background-image: url('images/second.png'); }
         }
 
-        /* قفزة بطيئة ومتقطعة (Stop-Motion) تتماشى مع الفريمات */
-        @keyframes jump-slow {
-            0%, 49% { transform: translateY(18px); } /* على الأرض مع الفريم الأول */
-            50%, 100% { transform: translateY(-12px); } /* في الهواء مع الفريم الثاني */
+        /* أنيميشن مركب: قفز وتقدم لليمين */
+        @keyframes kngr-jump-and-move {
+            0% { left: -150px; transform: translateY(18px); }
+            
+            /* دورة القفزة الواحدة (مثال لتقسيم الحركة) */
+            /* سنستخدم الـ Keyframes لتحريكه لليمين فقط في النصف الثاني من كل ثانية ونصف */
         }
 
-        @keyframes move-right {
+        /* تعديل الأنيميشن ليكون أكثر دقة برمجياً */
+        .kngr-animation-wrapper {
+            animation: move-forward 15s linear infinite;
+        }
+
+        .kngr-sprite {
+            /* الأنيميشن هنا سيتكفل بالبقاء مكانه ثم القفز */
+            animation: jump-and-stop 1.5s steps(1) infinite;
+        }
+
+        @keyframes jump-and-stop {
+            /* الفريم الأول: جالس على الأرض */
+            0%, 49% { 
+                background-image: url('images/first.png'); 
+                transform: translateY(18px) translateX(0); 
+            }
+            /* الفريم الثاني: يقفز ويندفع لليمين قليلاً داخل حركته */
+            50%, 100% { 
+                background-image: url('images/second.png'); 
+                transform: translateY(-12px) translateX(25px); 
+            }
+        }
+
+        @keyframes move-forward {
             0%   { left: -150px; }
             100% { left: 110%; }
         }
