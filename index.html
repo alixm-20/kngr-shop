@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* التنسيق العام */
+        /* الإعدادات العامة للموقع */
         body { 
             background-color: #efe3e3; 
             font-family: 'Segoe UI', sans-serif; 
             overflow-x: hidden; 
+            margin: 0;
+            padding: 0;
         }
         
-        /* الهيدر العلوي */
+        /* شريط التنقل (البار العلوي) */
         .navbar { 
             background: #694551; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
@@ -24,8 +26,7 @@
             top: 0;
             z-index: 1100;
             height: 70px; 
-            /* منع الكنغر من الخروج من حدود الهيدر */
-            overflow: hidden; 
+            overflow: hidden; /* لضمان عدم خروج الكنغر من الإطار */
         }
         
         .navbar-brand { 
@@ -40,10 +41,14 @@
             z-index: 1200;
         }
 
-        .brand-logo { width: 40px; height: auto; border-radius: 5px; }
+        .brand-logo { 
+            width: 40px; 
+            height: auto; 
+            border-radius: 5px; 
+        }
 
         /* ========================================================== */
-        /* أنيميشن الكنغر: الثبات عند الجلوس والاندفاع عند القفز فقط */
+        /* أنيميشن الكنغر المطور: الحركة مرتبطة بالفريم الثاني فقط */
         /* ========================================================== */
         
         .kngr-animation-wrapper {
@@ -54,7 +59,7 @@
             height: 100%;
             display: flex;
             align-items: center;
-            /* حركة الانتقال المستمرة لليسار كمسار أساسي */
+            /* حركة المسار الأساسية عبر الشاشة */
             animation: move-forward 20s linear infinite;
         }
 
@@ -64,32 +69,37 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            image-rendering: pixelated; /* للحفاظ على جودة البيكسل ارت */
-            
-            /* الأنيميشن الذي يدمج الفريمات والقفزة والاندفاع اللحظي */
-            animation: jump-and-snap 1.2s steps(1) infinite;
+            image-rendering: pixelated;
+            /* أنيميشن يدمج تغيير الصورة مع "دفعة" لليمين */
+            animation: jump-logic 1.2s infinite;
         }
 
-        @keyframes jump-and-snap {
-            /* من 0% إلى 50%: الكنغر جالس على الأرض، لا يتحرك إضافياً (ثبات) */
-            0%, 50% { 
+        @keyframes jump-logic {
+            /* الفريم الأول: جالس مكانه تماماً وبدون أي حركة إضافية */
+            0%, 45% { 
                 background-image: url('images/first.png'); 
                 transform: translateY(18px) translateX(0); 
             }
-            /* من 51% إلى 100%: الكنغر يقفز للأعلى، وهنا يندفع لليمين بـ 30 بكسل */
-            51%, 100% { 
+            /* الفريم الثاني: القفز للأعلى والاندفاع للأمام بـ 45 بكسل */
+            50%, 95% { 
                 background-image: url('images/second.png'); 
-                transform: translateY(-15px) translateX(35px); 
+                transform: translateY(-15px) translateX(45px); 
+            }
+            /* العودة لوضعية الجلوس */
+            100% {
+                background-image: url('images/first.png'); 
+                transform: translateY(18px) translateX(0);
             }
         }
 
+        /* المسار الذي يتحرك فيه الواwrapper من اليسار لليمين */
         @keyframes move-forward {
             0%   { left: -150px; }
-            100% { left: 115%; }
+            100% { left: 110%; }
         }
         /* ========================================================== */
 
-        /* إصلاح القائمة الجانبية لتجنب "انعصار" النصوص */
+        /* إصلاح القائمة الجانبية (Side Nav) */
         .side-nav { 
             height: 100%; 
             width: 0; 
@@ -103,7 +113,7 @@
             padding-top: 80px; 
         }
 
-        /* حاوية داخلية بعرض ثابت تمنع تشوه المحتوى أثناء حركة العرض (width) */
+        /* حاوية داخلية بعرض ثابت تمنع انضغاط النصوص أثناء الفتح */
         .side-nav-inner {
             width: 280px; 
             white-space: nowrap; 
@@ -153,7 +163,7 @@
             z-index: 1500; 
         }
         
-        /* تنسيق كروت المنتجات */
+        /* تنسيق المنتجات */
         .product-card { 
             background: white; 
             border-radius: 20px; 
@@ -175,7 +185,7 @@
             align-items: center; 
             justify-content: center; 
             overflow: hidden; 
-            background: #f9f9f9;
+            background: #fdfdfd;
         }
         .img-wrapper img { 
             width: 100%; 
@@ -187,11 +197,9 @@
         .info h3 { font-size: 1rem; margin-bottom: 8px; font-weight: 700; color: #444; }
         .price { color: #e74c3c; font-weight: 800; font-size: 1.15rem; }
 
-        /* تعديلات للموبايل */
+        /* تعديلات الموبايل */
         @media (max-width: 576px) {
-            .info h3 { font-size: 0.9rem; }
-            .price { font-size: 1rem; }
-            .navbar-brand span { display: none; } /* إخفاء النص لترك مساحة للكنغر */
+            .navbar-brand span { display: none; } /* لإتاحة مساحة أكبر للكنغر */
         }
     </style>
 </head>
