@@ -34,16 +34,19 @@
 
         .brand-logo { width: 40px; height: auto; border-radius: 5px; }
         .left-nav-side { display: flex; gap: 20px; align-items: center; z-index: 1200; }
+        .top-social-links { display: flex; gap: 15px; }
+        .top-social-link { color: #efe3e3; font-size: 1.3rem; transition: 0.3s; }
+        .top-social-link:hover { color: #ffffff; transform: scale(1.1); }
 
         /* ========================================= */
-        /* تـنـسـيـق الـكـنـغـر الـمـبـكـسـل (Pixel Style) */
+        /* التعديل: الكنغر المبكسل "إكسترا" مع 5 فريمات */
         /* ========================================= */
         
         .kngr-animation-wrapper {
             position: absolute;
             top: 0;
             left: -150px;
-            width: 100px;
+            width: 80px; /* تصغير المساحة لزيادة تركيز البكسل */
             height: 100%;
             display: flex;
             align-items: center;
@@ -51,17 +54,19 @@
         }
 
         .kngr-sprite {
-            width: 60px; /* حجم أصغر يناسب الـ Pixel Art */
-            height: 40px;
+            width: 50px; /* حجم صغير جداً لفرض مظهر البكسل */
+            height: 35px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             
-            /* أهم سطر لجعل الصورة تبدو مبكسلة بوضوح (Pixelated) */
-            image-rendering: pixelated; 
+            /* تفعيل محرك البكسل في المتصفح */
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: pixelated;
             image-rendering: crisp-edges;
 
-            /* أنيميشن تبديل 5 فريمات بنسب دقيقة */
+            /* أنيميشن 5 فريمات بنسب دقيقة */
             animation: play-frames 0.6s steps(1) infinite;
         }
 
@@ -81,30 +86,41 @@
 
         @keyframes jump-up-down {
             0%, 100% { transform: translateY(15px); } 
-            50%      { transform: translateY(-20px); } /* قفزة أعلى قليلاً لتناسب السرعة */
+            50%      { transform: translateY(-20px); } 
         }
         
         /* ========================================= */
 
-        .side-nav { height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; left: 0; background-color: #694551; overflow-x: hidden; transition: 0.5s; padding-top: 80px; }
-        .side-nav a { padding: 15px 30px; text-decoration: none; font-size: 1.1rem; color: #efe3e3; display: block; transition: 0.3s; text-align: right; }
-        .menu-icon { cursor: pointer; color: white; font-size: 1.5rem; }
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1500; }
+        .side-nav { height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; left: 0; background-color: #694551; overflow-x: hidden; transition: 0.5s; padding-top: 80px; box-shadow: 10px 0 30px rgba(0,0,0,0.3); }
+        .side-nav a { padding: 15px 30px; text-decoration: none; font-size: 1.1rem; color: #efe3e3; display: block; transition: 0.3s; text-align: right; opacity: 0; }
+        .side-nav.active a { opacity: 1; transform: translateX(0); }
+        .close-btn { position: absolute; top: 20px; left: 20px; font-size: 2.5rem; color: white; cursor: pointer; }
+        .menu-icon { cursor: pointer; color: white; font-size: 1.5rem; display: flex; align-items: center; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(3px); z-index: 1500; }
+        
+        /* كروت المنتجات */
         .product-card { background: white; border-radius: 20px; overflow: hidden; transition: 0.3s; border: 1px solid #dcc9c9; text-decoration: none; color: inherit; display: block; height: 100%; }
-        .product-card:hover { transform: translateY(-10px); }
-        .img-wrapper { height: 250px; display: flex; align-items: center; justify-content: center; }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(105, 69, 81, 0.2); }
+        .img-wrapper { height: 250px; background: #ffffff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .img-wrapper img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
         .info { padding: 15px; text-align: center; }
-        .price { color: #e74c3c; font-weight: 800; }
+        .info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; min-height: 50px; color: #694551; }
+        .price { color: #e74c3c; font-weight: 800; font-size: 1.2rem; }
+        .view-details { display: inline-block; margin-top: 10px; padding: 5px 15px; background-color: #694551; color: white !important; border-radius: 8px; font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
 <div id="sideMenu" class="side-nav">
-    <div class="text-center mb-4"><img src="logo-web.png" style="width: 70px;"></div>
+    <span class="close-btn" onclick="closeNav()">&times;</span>
+    <div class="text-center mb-4">
+        <img src="logo-web.png" style="width: 70px; border-radius: 10px;">
+        <p class="text-white mt-2 fw-bold">أقسام المتجر</p>
+    </div>
     <a href="index.html">الرئيسية</a>
-    <a href="#">منتجات منزلية</a>
-    <a href="#">تجهيزات رياضية</a>
+    <a href="home-products.html">منتجات منزلية</a>
+    <a href="sports-products.html">تجهيزات رياضية</a>
+    <a href="personal-care.html">العناية الشخصية</a>
 </div>
 
 <div id="overlay" class="overlay" onclick="closeNav()"></div>
@@ -121,14 +137,106 @@
         </div>
 
         <div class="left-nav-side">
+            <div class="top-social-links">
+                <a href="https://wa.me/9647751838313" class="top-social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/kngr_shop" class="top-social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
             <div class="menu-icon" onclick="openNav()"><i class="fas fa-bars"></i></div>
         </div>
     </div>
 </nav>
 
+<div class="container mb-5">
+    <div class="row g-4"> 
+        <div class="col-6 col-md-4 col-lg-3">
+            <a href="product-details.html" class="product-card">
+                <div class="img-wrapper"><img src="hezam4.jpg" alt="حزام الظهر"></div>
+                <div class="info">
+                    <h3>حزام تصحيح استقامة الظهر</h3>
+                    <div class="price">16,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <a href="product-2.html" class="product-card">
+                <div class="img-wrapper"><img src="teeth.png" alt="قلم مبيض الاسنان"></div>
+                <div class="info">
+                    <h3>قلم مبيض الاسنان الفوري 2 قطعة</h3>
+                    <div class="price">16,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <a href="projector.html" class="product-card">
+                <div class="img-wrapper"><img src="projector.png" alt="بروجكتر"></div>
+                <div class="info">
+                    <h3>جهاز عرض (بروجكتر) ضوء القمر والارض</h3>
+                    <div class="price">18,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <a href="boxing.html" class="product-card">
+                <div class="img-wrapper"><img src="boxing.png" alt="تقوية قبضة اليد"></div>
+                <div class="info">
+                    <h3>مجموعة تمارين تقوية قبضة اليد</h3>
+                    <div class="price">13,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <a href="chair.html" class="product-card">
+                <div class="img-wrapper"><img src="chair.jpg" alt="كرسي"></div>
+                <div class="info">
+                    <h3>كرسي هوائي فاخر مع طبلة</h3>
+                    <div class="price">20,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <a href="hafeda.html" class="product-card">
+                <div class="img-wrapper"><img src="hafeda.png" alt="حافظة المعجنات"></div>
+                <div class="info">
+                    <h3>حافظة الصمون و المعجنات الخشبية الفاخرة</h3>
+                    <div class="price">29,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <a href="easy-cooler.html" class="product-card">
+                <div class="img-wrapper"><img src="cooler1.PNG" alt="جهاز تبريد مياه الخزانات"></div>
+                <div class="info">
+                    <h3>جهاز تبريد مياه الخزانات (التانكي)</h3>
+                    <div class="price">90,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
+            </a>
+        </div>
+    </div> 
+</div>
+
 <script>
-    function openNav() { document.getElementById("sideMenu").style.width = "280px"; document.getElementById("overlay").style.display = "block"; }
-    function closeNav() { document.getElementById("sideMenu").style.width = "0"; document.getElementById("overlay").style.display = "none"; }
+    function openNav() {
+        const menu = document.getElementById("sideMenu");
+        const overlay = document.getElementById("overlay");
+        menu.style.width = "280px";
+        menu.classList.add("active");
+        overlay.style.display = "block";
+    }
+
+    function closeNav() {
+        const menu = document.getElementById("sideMenu");
+        const overlay = document.getElementById("overlay");
+        menu.style.width = "0";
+        menu.classList.remove("active");
+        overlay.style.display = "none";
+    }
 </script>
 
 </body>
