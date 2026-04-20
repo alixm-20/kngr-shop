@@ -6,9 +6,16 @@
     <title>متجر كنغر - الرئيسية</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-        body { background-color: #efe3e3; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+        /* التنسيق العام */
+        body { 
+            background-color: #efe3e3; 
+            font-family: 'Segoe UI', sans-serif; 
+            overflow-x: hidden; 
+        }
         
+        /* الهيدر العلوي */
         .navbar { 
             background: #694551; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
@@ -17,6 +24,7 @@
             top: 0;
             z-index: 1100;
             height: 70px; 
+            /* منع الكنغر من الخروج من حدود الهيدر */
             overflow: hidden; 
         }
         
@@ -28,29 +36,26 @@
             align-items: center; 
             gap: 10px; 
             text-decoration: none;
-            z-index: 1200; 
+            position: relative;
+            z-index: 1200;
         }
 
         .brand-logo { width: 40px; height: auto; border-radius: 5px; }
-        .left-nav-side { display: flex; gap: 20px; align-items: center; z-index: 1200; }
-        .top-social-links { display: flex; gap: 15px; }
-        .top-social-link { color: #efe3e3; font-size: 1.3rem; transition: 0.3s; }
-        .top-social-link:hover { color: #ffffff; transform: scale(1.1); }
 
-        /* ========================================= */
-        /* التعديل الجديد: الاندفاع أثناء القفز فقط */
-        /* ========================================= */
+        /* ========================================================== */
+        /* أنيميشن الكنغر: الثبات عند الجلوس والاندفاع عند القفز فقط */
+        /* ========================================================== */
         
         .kngr-animation-wrapper {
             position: absolute;
             top: 0;
-            left: -150px; /* نقطة البداية */
+            left: -150px;
             width: 80px; 
             height: 100%;
             display: flex;
             align-items: center;
-            /* الآن الأنيميشن الرئيسي يتحكم في القفزة والتقدم معاً */
-            animation: kngr-jump-and-move 30s steps(100) infinite;
+            /* حركة الانتقال المستمرة لليسار كمسار أساسي */
+            animation: move-forward 20s linear infinite;
         }
 
         .kngr-sprite {
@@ -59,79 +64,151 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            image-rendering: pixelated;
-            /* تبديل الفريمات */
-            animation: play-two-frames 1.5s steps(1) infinite;
-        }
-
-        /* تبديل الفريمين: 0-50% (ثبات)، 50-100% (قفز) */
-        @keyframes play-two-frames {
-            0%, 49% { background-image: url('images/first.png'); }
-            50%, 100% { background-image: url('images/second.png'); }
-        }
-
-        /* أنيميشن مركب: قفز وتقدم لليمين */
-        @keyframes kngr-jump-and-move {
-            0% { left: -150px; transform: translateY(18px); }
+            image-rendering: pixelated; /* للحفاظ على جودة البيكسل ارت */
             
-            /* دورة القفزة الواحدة (مثال لتقسيم الحركة) */
-            /* سنستخدم الـ Keyframes لتحريكه لليمين فقط في النصف الثاني من كل ثانية ونصف */
+            /* الأنيميشن الذي يدمج الفريمات والقفزة والاندفاع اللحظي */
+            animation: jump-and-snap 1.2s steps(1) infinite;
         }
 
-        /* تعديل الأنيميشن ليكون أكثر دقة برمجياً */
-        .kngr-animation-wrapper {
-            animation: move-forward 15s linear infinite;
-        }
-
-        .kngr-sprite {
-            /* الأنيميشن هنا سيتكفل بالبقاء مكانه ثم القفز */
-            animation: jump-and-stop 1.5s steps(1) infinite;
-        }
-
-        @keyframes jump-and-stop {
-            /* الفريم الأول: جالس على الأرض */
-            0%, 49% { 
+        @keyframes jump-and-snap {
+            /* من 0% إلى 50%: الكنغر جالس على الأرض، لا يتحرك إضافياً (ثبات) */
+            0%, 50% { 
                 background-image: url('images/first.png'); 
                 transform: translateY(18px) translateX(0); 
             }
-            /* الفريم الثاني: يقفز ويندفع لليمين قليلاً داخل حركته */
-            50%, 100% { 
+            /* من 51% إلى 100%: الكنغر يقفز للأعلى، وهنا يندفع لليمين بـ 30 بكسل */
+            51%, 100% { 
                 background-image: url('images/second.png'); 
-                transform: translateY(-12px) translateX(25px); 
+                transform: translateY(-15px) translateX(35px); 
             }
         }
 
         @keyframes move-forward {
             0%   { left: -150px; }
-            100% { left: 110%; }
+            100% { left: 115%; }
         }
-        /* ========================================= */
+        /* ========================================================== */
 
-        .side-nav { height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; left: 0; background-color: #694551; overflow-x: hidden; transition: 0.5s; padding-top: 80px; }
-        .side-nav a { padding: 15px 30px; text-decoration: none; font-size: 1.1rem; color: #efe3e3; display: block; text-align: right; }
-        .close-btn { position: absolute; top: 20px; left: 20px; font-size: 2.5rem; color: white; cursor: pointer; }
-        .menu-icon { cursor: pointer; color: white; font-size: 1.5rem; display: flex; align-items: center; }
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1500; }
+        /* إصلاح القائمة الجانبية لتجنب "انعصار" النصوص */
+        .side-nav { 
+            height: 100%; 
+            width: 0; 
+            position: fixed; 
+            z-index: 2000; 
+            top: 0; 
+            left: 0; 
+            background-color: #694551; 
+            overflow-x: hidden; 
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            padding-top: 80px; 
+        }
+
+        /* حاوية داخلية بعرض ثابت تمنع تشوه المحتوى أثناء حركة العرض (width) */
+        .side-nav-inner {
+            width: 280px; 
+            white-space: nowrap; 
+        }
+
+        .side-nav a { 
+            padding: 15px 30px; 
+            text-decoration: none; 
+            font-size: 1.1rem; 
+            color: #efe3e3; 
+            display: block; 
+            text-align: right; 
+            transition: 0.3s;
+        }
+
+        .side-nav a:hover { 
+            color: #ffffff; 
+            background: rgba(255, 255, 255, 0.1); 
+        }
+
+        .close-btn { 
+            position: absolute; 
+            top: 20px; 
+            left: 20px; 
+            font-size: 2.5rem; 
+            color: white; 
+            cursor: pointer; 
+        }
         
-        .product-card { background: white; border-radius: 20px; overflow: hidden; transition: 0.3s; border: 1px solid #dcc9c9; text-decoration: none; color: inherit; display: block; height: 100%; }
-        .img-wrapper { height: 250px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .img-wrapper img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
+        .menu-icon { 
+            cursor: pointer; 
+            color: white; 
+            font-size: 1.5rem; 
+            display: flex; 
+            align-items: center; 
+            z-index: 1200;
+        }
+        
+        .overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.4); 
+            z-index: 1500; 
+        }
+        
+        /* تنسيق كروت المنتجات */
+        .product-card { 
+            background: white; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            transition: 0.3s ease; 
+            border: 1px solid #dcc9c9; 
+            text-decoration: none; 
+            color: inherit; 
+            display: block; 
+            height: 100%; 
+        }
+        .product-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 12px 25px rgba(0,0,0,0.08); 
+        }
+        .img-wrapper { 
+            height: 220px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden; 
+            background: #f9f9f9;
+        }
+        .img-wrapper img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            padding: 15px; 
+        }
         .info { padding: 15px; text-align: center; }
-        .price { color: #e74c3c; font-weight: 800; font-size: 1.2rem; }
+        .info h3 { font-size: 1rem; margin-bottom: 8px; font-weight: 700; color: #444; }
+        .price { color: #e74c3c; font-weight: 800; font-size: 1.15rem; }
+
+        /* تعديلات للموبايل */
+        @media (max-width: 576px) {
+            .info h3 { font-size: 0.9rem; }
+            .price { font-size: 1rem; }
+            .navbar-brand span { display: none; } /* إخفاء النص لترك مساحة للكنغر */
+        }
     </style>
 </head>
 <body>
 
 <div id="sideMenu" class="side-nav">
-    <span class="close-btn" onclick="closeNav()">&times;</span>
-    <div class="text-center mb-4">
-        <img src="logo-web.png" style="width: 70px; border-radius: 10px;">
-        <p class="text-white mt-2 fw-bold">أقسام المتجر</p>
+    <div class="side-nav-inner">
+        <span class="close-btn" onclick="closeNav()">&times;</span>
+        <div class="text-center mb-4">
+            <img src="logo-web.png" style="width: 70px; border-radius: 10px;">
+            <p class="text-white mt-2 fw-bold">أقسام المتجر</p>
+        </div>
+        <a href="index.html"><i class="fas fa-home ms-2"></i> الرئيسية</a>
+        <a href="home-products.html"><i class="fas fa-couch ms-2"></i> منتجات منزلية</a>
+        <a href="sports-products.html"><i class="fas fa-dumbbell ms-2"></i> تجهيزات رياضية</a>
+        <a href="personal-care.html"><i class="fas fa-sparkles ms-2"></i> العناية الشخصية</a>
     </div>
-    <a href="index.html">الرئيسية</a>
-    <a href="home-products.html">منتجات منزلية</a>
-    <a href="sports-products.html">تجهيزات رياضية</a>
-    <a href="personal-care.html">العناية الشخصية</a>
 </div>
 
 <div id="overlay" class="overlay" onclick="closeNav()"></div>
@@ -147,12 +224,10 @@
             <div class="kngr-sprite"></div>
         </div>
 
-        <div class="left-nav-side">
-            <div class="top-social-links">
-                <a href="https://wa.me/9647751838313" class="top-social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.instagram.com/kngr_shop" class="top-social-link" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
-            <div class="menu-icon" onclick="openNav()"><i class="fas fa-bars"></i></div>
+        <div class="d-flex gap-3 align-items-center">
+            <a href="https://wa.me/9647751838313" class="text-white fs-5" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/kngr_shop" class="text-white fs-5" target="_blank"><i class="fab fa-instagram"></i></a>
+            <div class="menu-icon ms-2" onclick="openNav()"><i class="fas fa-bars"></i></div>
         </div>
     </div>
 </nav>
@@ -205,8 +280,15 @@
 </div>
 
 <script>
-    function openNav() { document.getElementById("sideMenu").style.width = "280px"; document.getElementById("overlay").style.display = "block"; }
-    function closeNav() { document.getElementById("sideMenu").style.width = "0"; document.getElementById("overlay").style.display = "none"; }
+    function openNav() { 
+        document.getElementById("sideMenu").style.width = "280px"; 
+        document.getElementById("overlay").style.display = "block"; 
+    }
+    
+    function closeNav() { 
+        document.getElementById("sideMenu").style.width = "0"; 
+        document.getElementById("overlay").style.display = "none"; 
+    }
 </script>
 
 </body>
