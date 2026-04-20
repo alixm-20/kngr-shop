@@ -39,7 +39,7 @@
         .top-social-link:hover { color: #ffffff; transform: scale(1.1); }
 
         /* ========================================= */
-        /* التعديل الجذري: حركة Stop-Motion خشنة */
+        /* أنيميشن الكنغر: بطيء، أنيق، وبفريمين فقط */
         /* ========================================= */
         
         .kngr-animation-wrapper {
@@ -50,45 +50,40 @@
             height: 100%;
             display: flex;
             align-items: center;
-            /* التغيير هنا: استخدام steps(20) لجعل الانتقال لليمين متقطع وليس ناعم */
-            animation: move-right 10s steps(40) infinite;
+            /* تبطئة الحركة لـ 15 ثانية لجعلها هادئة */
+            animation: move-right 15s steps(60) infinite;
         }
 
         .kngr-sprite {
             width: 55px; 
-            height: 40px;
+            height: 45px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            
-            /* الحفاظ على بكسلة الحواف */
             image-rendering: pixelated;
-            image-rendering: crisp-edges;
 
-            /* أنيميشن الفريمات وحركة الصعود والهبوط المتقطعة */
-            /* جعلنا حركة القفز تتبع الفريمات بالضبط بدون نعومة */
+            /* ربط تبديل الفريمات مع القفزة بنفس التوقيت (1.2 ثانية) */
             animation: 
-                play-frames 0.7s steps(1) infinite,
-                jump-stop-motion 0.7s steps(2) infinite;
+                play-two-frames 1.2s steps(1) infinite,
+                jump-slow 1.2s steps(2) infinite;
         }
 
-        /* تبديل الصور الـ 5 بنسب متساوية */
-        @keyframes play-frames {
-            0%   { background-image: url('images/first.png'); }
-            100%  { background-image: url('images/second.png'); }
+        /* تبديل الفريمين فقط */
+        @keyframes play-two-frames {
+            0%, 49% { background-image: url('images/first.png'); }
+            50%, 100% { background-image: url('images/second.png'); }
         }
 
-        /* حركة الصعود والهبوط (بدون تنعيم) */
-        @keyframes jump-stop-motion {
-            0%, 100% { transform: translateY(15px); } 
-            50%      { transform: translateY(-15px); } 
+        /* قفزة بطيئة ومتقطعة (Stop-Motion) تتماشى مع الفريمات */
+        @keyframes jump-slow {
+            0%, 49% { transform: translateY(18px); } /* على الأرض مع الفريم الأول */
+            50%, 100% { transform: translateY(-12px); } /* في الهواء مع الفريم الثاني */
         }
 
         @keyframes move-right {
             0%   { left: -150px; }
             100% { left: 110%; }
         }
-        
         /* ========================================= */
 
         .side-nav { height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; left: 0; background-color: #694551; overflow-x: hidden; transition: 0.5s; padding-top: 80px; }
