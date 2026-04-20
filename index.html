@@ -17,6 +17,8 @@
             position: sticky;
             top: 0;
             z-index: 1100;
+            height: 70px; /* تم تثبيت الارتفاع ليتناسب مع القفزة */
+            overflow: hidden; /* ضروري لكي لا يخرج الكنغر خارج حدود الهيدر */
         }
         
         .navbar-brand { 
@@ -27,13 +29,66 @@
             align-items: center; 
             gap: 10px; 
             text-decoration: none;
+            z-index: 1200; /* ليبقى اللوجو فوق الكنغر */
         }
 
         .brand-logo { width: 40px; height: auto; border-radius: 5px; }
-        .left-nav-side { display: flex; gap: 20px; align-items: center; }
+        .left-nav-side { display: flex; gap: 20px; align-items: center; z-index: 1200; }
         .top-social-links { display: flex; gap: 15px; }
         .top-social-link { color: #efe3e3; font-size: 1.3rem; transition: 0.3s; }
         .top-social-link:hover { color: #ffffff; transform: scale(1.1); }
+
+        /* ========================================= */
+        /* تـنـسـيـق الـكـنـغـر الـقـافـز (إضافتي لك) */
+        /* ========================================= */
+        
+        .kngr-animation-wrapper {
+            position: absolute;
+            top: 0;
+            left: -150px;
+            width: 100px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            /* حركة الانتقال لليمين + حركة القفز للأعلى وللأسفل */
+            animation: move-right 12s linear infinite, jump-up-down 0.8s ease-in-out infinite;
+        }
+
+        .kngr-sprite {
+            width: 80px;
+            height: 50px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            /* تبديل الصور السبعة التي صنعتها أنت */
+            animation: play-frames 0.8s steps(1) infinite;
+        }
+
+        /* أنيميشن تبديل الفريمات السبعة */
+        @keyframes play-frames {
+            0%   { background-image: url('images/first.png'); }
+            14%  { background-image: url('images/second.png'); }
+            28%  { background-image: url('images/third.png'); }
+            42%  { background-image: url('images/forth.png'); }
+            56%  { background-image: url('images/fifth.png'); }
+            70%  { background-image: url('images/sixth.png'); }
+            85%  { background-image: url('images/seventh.png'); }
+            100% { background-image: url('images/first.png'); }
+        }
+
+        /* أنيميشن التحرك أفقياً */
+        @keyframes move-right {
+            0%   { left: -150px; }
+            100% { left: 110%; }
+        }
+
+        /* أنيميشن القفز (ارتفاع وانخفاض) ليكون واقعياً */
+        @keyframes jump-up-down {
+            0%, 100% { transform: translateY(15px); } /* عند الأرض */
+            50%      { transform: translateY(-15px); } /* في الهواء */
+        }
+        
+        /* ========================================= */
 
         /* القائمة الجانبية الفخمة */
         .side-nav {
@@ -137,6 +192,11 @@
             <img src="logo-web.png" alt="لوجو متجر كنغر" class="brand-logo">
             <span>متجر كنغر</span>
         </a>
+
+        <div class="kngr-animation-wrapper">
+            <div class="kngr-sprite"></div>
+        </div>
+
         <div class="left-nav-side">
             <div class="top-social-links">
                 <a href="https://wa.me/9647751838313" class="top-social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
