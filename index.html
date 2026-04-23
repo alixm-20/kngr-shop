@@ -104,7 +104,7 @@
             z-index: 1500; 
         }
         
-        /* تنسيق بطاقات المنتجات للتحميل السريع */
+        /* تنسيق بطاقات المنتجات */
         .product-card { 
             background: white; 
             border-radius: 20px; 
@@ -116,7 +116,7 @@
             display: block; 
             height: 100%; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-            will-change: transform; /* تحسين أداء الأنيميشن */
+            will-change: transform;
         }
 
         .product-card:hover { 
@@ -134,19 +134,18 @@
             background: #ffffff;
         }
 
-        /* تعديلات الجودة والسرعة للصور */
+        /* تعديلات الصور - تم حذف الـ blur */
         .img-wrapper img { 
             width: 100%; 
             height: 100%; 
             object-fit: contain; 
             padding: 15px;
-            transition: transform 0.5s ease, filter 0.3s ease;
-            filter: blur(0.5px) brightness(0.98); /* تقليل الجودة ظاهرياً لزيادة النعومة */
+            transition: transform 0.5s ease;
+            filter: none; /* تم إلغاء التغبيش */
         }
 
         .product-card:hover .img-wrapper img { 
             transform: scale(1.05); 
-            filter: blur(0) brightness(1); /* استعادة الجودة عند التفاعل */
         }
 
         .info { padding: 15px; text-align: center; }
