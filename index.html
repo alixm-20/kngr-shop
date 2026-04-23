@@ -11,22 +11,22 @@
         /* الإعدادات العامة للموقع */
         body { 
             background-color: #efe3e3; 
-            font-family: 'Segoe UI', sans-serif; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             overflow-x: hidden; 
             margin: 0;
             padding: 0;
+            color: #333;
         }
         
         /* شريط التنقل (البار العلوي) */
         .navbar { 
             background: #694551; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
             padding: 10px 0; 
             position: sticky;
             top: 0;
             z-index: 1100;
             height: 70px; 
-            overflow: hidden; /* لضمان عدم خروج الكنغر من الإطار */
         }
         
         .navbar-brand { 
@@ -35,71 +35,18 @@
             font-size: 1.4rem; 
             display: flex; 
             align-items: center; 
-            gap: 10px; 
+            gap: 12px; 
             text-decoration: none;
-            position: relative;
-            z-index: 1200;
         }
 
         .brand-logo { 
             width: 40px; 
-            height: auto; 
-            border-radius: 5px; 
+            height: 40px; 
+            border-radius: 8px; 
+            object-fit: cover;
         }
 
-        /* ========================================================== */
-        /* أنيميشن الكنغر المطور: الحركة مرتبطة بالفريم الثاني فقط */
-        /* ========================================================== */
-        
-        .kngr-animation-wrapper {
-            position: absolute;
-            top: 0;
-            left: -150px;
-            width: 80px; 
-            height: 100%;
-            display: flex;
-            align-items: center;
-            /* حركة المسار الأساسية عبر الشاشة */
-            animation: move-forward 20s linear infinite;
-        }
-
-        .kngr-sprite {
-            width: 55px; 
-            height: 45px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            image-rendering: pixelated;
-            /* أنيميشن يدمج تغيير الصورة مع "دفعة" لليمين */
-            animation: jump-logic 1.2s infinite;
-        }
-
-        @keyframes jump-logic {
-            /* الفريم الأول: جالس مكانه تماماً وبدون أي حركة إضافية */
-            0%, 45% { 
-                background-image: url('images/first.png'); 
-                transform: translateY(18px) translateX(0); 
-            }
-            /* الفريم الثاني: القفز للأعلى والاندفاع للأمام بـ 45 بكسل */
-            50%, 95% { 
-                background-image: url('images/second.png'); 
-                transform: translateY(-15px) translateX(45px); 
-            }
-            /* العودة لوضعية الجلوس */
-            100% {
-                background-image: url('images/first.png'); 
-                transform: translateY(18px) translateX(0);
-            }
-        }
-
-        /* المسار الذي يتحرك فيه الواwrapper من اليسار لليمين */
-        @keyframes move-forward {
-            0%   { left: -150px; }
-            100% { left: 110%; }
-        }
-        /* ========================================================== */
-
-        /* إصلاح القائمة الجانبية (Side Nav) */
+        /* إصلاح القائمة الجانبية مع تأثير Blur */
         .side-nav { 
             height: 100%; 
             width: 0; 
@@ -107,13 +54,14 @@
             z-index: 2000; 
             top: 0; 
             left: 0; 
-            background-color: #694551; 
+            background-color: rgba(105, 69, 81, 0.95); /* لون متناسق مع الشفافية */
+            backdrop-filter: blur(10px); /* تأثير الضبابية الجميل */
             overflow-x: hidden; 
             transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
             padding-top: 80px; 
+            box-shadow: 2px 0 15px rgba(0,0,0,0.2);
         }
 
-        /* حاوية داخلية بعرض ثابت تمنع انضغاط النصوص أثناء الفتح */
         .side-nav-inner {
             width: 280px; 
             white-space: nowrap; 
@@ -127,11 +75,13 @@
             display: block; 
             text-align: right; 
             transition: 0.3s;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .side-nav a:hover { 
             color: #ffffff; 
             background: rgba(255, 255, 255, 0.1); 
+            padding-right: 40px; /* أنيميشن بسيط عند الحوم */
         }
 
         .close-btn { 
@@ -149,7 +99,11 @@
             font-size: 1.5rem; 
             display: flex; 
             align-items: center; 
-            z-index: 1200;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-icon:hover {
+            transform: scale(1.1);
         }
         
         .overlay { 
@@ -159,47 +113,86 @@
             left: 0; 
             width: 100%; 
             height: 100%; 
-            background: rgba(0,0,0,0.4); 
+            background: rgba(0,0,0,0.5); 
             z-index: 1500; 
+            backdrop-filter: blur(2px);
         }
         
-        /* تنسيق المنتجات */
+        /* تنسيق المنتجات المطور */
         .product-card { 
             background: white; 
             border-radius: 20px; 
             overflow: hidden; 
-            transition: 0.3s ease; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 1px solid #dcc9c9; 
             text-decoration: none; 
             color: inherit; 
             display: block; 
             height: 100%; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
+
         .product-card:hover { 
-            transform: translateY(-8px); 
-            box-shadow: 0 12px 25px rgba(0,0,0,0.08); 
+            transform: translateY(-10px); 
+            box-shadow: 0 15px 30px rgba(105, 69, 81, 0.15); 
+            border-color: #694551;
         }
+
         .img-wrapper { 
             height: 220px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             overflow: hidden; 
-            background: #fdfdfd;
+            background: #ffffff;
+            position: relative;
         }
+
         .img-wrapper img { 
             width: 100%; 
             height: 100%; 
             object-fit: contain; 
             padding: 15px; 
+            transition: transform 0.5s ease;
+            /* خاصية لتحسين سرعة المتصفح */
+            content-visibility: auto;
         }
-        .info { padding: 15px; text-align: center; }
-        .info h3 { font-size: 1rem; margin-bottom: 8px; font-weight: 700; color: #444; }
-        .price { color: #e74c3c; font-weight: 800; font-size: 1.15rem; }
+
+        .product-card:hover .img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .info { padding: 18px; text-align: center; }
+        .info h3 { 
+            font-size: 0.95rem; 
+            margin-bottom: 10px; 
+            font-weight: 700; 
+            color: #444; 
+            height: 2.4em; /* لتوحيد ارتفاع العناوين */
+            overflow: hidden;
+        }
+        .price { 
+            color: #e74c3c; 
+            font-weight: 800; 
+            font-size: 1.2rem; 
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .view-details {
+            font-size: 0.8rem;
+            color: #694551;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
         /* تعديلات الموبايل */
         @media (max-width: 576px) {
-            .navbar-brand span { display: none; } /* لإتاحة مساحة أكبر للكنغر */
+            .navbar-brand span { font-size: 1.1rem; }
+            .img-wrapper { height: 160px; }
+            .info h3 { font-size: 0.85rem; }
+            .price { font-size: 1rem; }
         }
     </style>
 </head>
@@ -209,7 +202,7 @@
     <div class="side-nav-inner">
         <span class="close-btn" onclick="closeNav()">&times;</span>
         <div class="text-center mb-4">
-            <img src="logo-web.png" style="width: 70px; border-radius: 10px;">
+            <img src="logo-web.png" style="width: 70px; border-radius: 10px;" alt="شعار المتجر">
             <p class="text-white mt-2 fw-bold">أقسام المتجر</p>
         </div>
         <a href="index.html"><i class="fas fa-home ms-2"></i> الرئيسية</a>
@@ -224,17 +217,13 @@
 <nav class="navbar mb-5">
     <div class="container d-flex justify-content-between align-items-center">
         <a class="navbar-brand" href="index.html">
-            <img src="logo-web.png" alt="لوجو" class="brand-logo">
+            <img src="logo-web.png" alt="لوجو متجر كنغر" class="brand-logo">
             <span>متجر كنغر</span>
         </a>
 
-        <div class="kngr-animation-wrapper">
-            <div class="kngr-sprite"></div>
-        </div>
-
         <div class="d-flex gap-3 align-items-center">
-            <a href="https://wa.me/9647751838313" class="text-white fs-5" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.instagram.com/kngr_shop" class="text-white fs-5" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/9647751838313" class="text-white fs-5" target="_blank" aria-label="Whatsapp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/kngr_shop" class="text-white fs-5" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             <div class="menu-icon ms-2" onclick="openNav()"><i class="fas fa-bars"></i></div>
         </div>
     </div>
@@ -244,44 +233,86 @@
     <div class="row g-4"> 
         <div class="col-6 col-md-4 col-lg-3">
             <a href="product-details.html" class="product-card">
-                <div class="img-wrapper"><img src="hezam4.jpg" alt="حزام الظهر"></div>
-                <div class="info"><h3>حزام تصحيح استقامة الظهر</h3><div class="price">16,000 د.ع</div></div>
+                <div class="img-wrapper">
+                    <img src="hezam4.jpg" alt="حزام تصحيح استقامة الظهر" loading="lazy">
+                </div>
+                <div class="info">
+                    <h3>حزام تصحيح استقامة الظهر</h3>
+                    <div class="price">16,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
             </a>
         </div>
         <div class="col-6 col-md-4 col-lg-3">
             <a href="product-2.html" class="product-card">
-                <div class="img-wrapper"><img src="teeth.png" alt="مبيض الاسنان"></div>
-                <div class="info"><h3>قلم مبيض الاسنان الفوري</h3><div class="price">16,000 د.ع</div></div>
+                <div class="img-wrapper">
+                    <img src="teeth.png" alt="قلم مبيض الاسنان الفوري" loading="lazy">
+                </div>
+                <div class="info">
+                    <h3>قلم مبيض الاسنان الفوري</h3>
+                    <div class="price">16,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
             </a>
         </div>
         <div class="col-6 col-md-4 col-lg-3">
             <a href="projector.html" class="product-card">
-                <div class="img-wrapper"><img src="projector.png" alt="بروجكتر"></div>
-                <div class="info"><h3>بروجكتر ضوء القمر والارض</h3><div class="price">18,000 د.ع</div></div>
+                <div class="img-wrapper">
+                    <img src="projector.png" alt="بروجكتر ضوء القمر والارض" loading="lazy">
+                </div>
+                <div class="info">
+                    <h3>بروجكتر ضوء القمر والارض</h3>
+                    <div class="price">18,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
             </a>
         </div>
         <div class="col-6 col-md-4 col-lg-3">
             <a href="boxing.html" class="product-card">
-                <div class="img-wrapper"><img src="boxing.png" alt="قبضة اليد"></div>
-                <div class="info"><h3>مجموعة تمارين قبضة اليد</h3><div class="price">13,000 د.ع</div></div>
+                <div class="img-wrapper">
+                    <img src="boxing.png" alt="مجموعة تمارين قبضة اليد" loading="lazy">
+                </div>
+                <div class="info">
+                    <h3>مجموعة تمارين قبضة اليد</h3>
+                    <div class="price">13,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
             </a>
         </div>
         <div class="col-6 col-md-4 col-lg-3">
             <a href="chair.html" class="product-card">
-                <div class="img-wrapper"><img src="chair.jpg" alt="كرسي"></div>
-                <div class="info"><h3>كرسي هوائي فاخر</h3><div class="price">20,000 د.ع</div></div>
+                <div class="img-wrapper">
+                    <img src="chair.jpg" alt="كرسي هوائي فاخر" loading="lazy">
+                </div>
+                <div class="info">
+                    <h3>كرسي هوائي فاخر</h3>
+                    <div class="price">20,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
             </a>
         </div>
         <div class="col-6 col-md-4 col-lg-3">
             <a href="hafeda.html" class="product-card">
-                <div class="img-wrapper"><img src="hafeda.png" alt="حافظة المعجنات"></div>
-                <div class="info"><h3>حافظة المعجنات الخشبية</h3><div class="price">29,000 د.ع</div></div>
+                <div class="img-wrapper">
+                    <img src="hafeda.png" alt="حافظة المعجنات الخشبية" loading="lazy">
+                </div>
+                <div class="info">
+                    <h3>حافظة المعجنات الخشبية</h3>
+                    <div class="price">29,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
             </a>
         </div>
         <div class="col-6 col-md-4 col-lg-3">
             <a href="easy-cooler.html" class="product-card">
-                <div class="img-wrapper"><img src="cooler1.PNG" alt="مبرد التانكي"></div>
-                <div class="info"><h3>جهاز تبريد مياه الخزانات</h3><div class="price">90,000 د.ع</div></div>
+                <div class="img-wrapper">
+                    <img src="cooler.png" alt="جهاز تبريد مياه الخزانات" loading="lazy">
+                </div>
+                <div class="info">
+                    <h3>جهاز تبريد مياه الخزانات (التانكي)</h3>
+                    <div class="price">90,000 د.ع</div>
+                    <span class="view-details">عرض التفاصيل</span>
+                </div>
             </a>
         </div>
     </div> 
@@ -297,6 +328,13 @@
         document.getElementById("sideMenu").style.width = "0"; 
         document.getElementById("overlay").style.display = "none"; 
     }
+
+    // إغلاق القائمة عند الضغط على مفتاح Escape لزيادة سهولة الاستخدام
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            closeNav();
+        }
+    });
 </script>
 
 </body>
