@@ -16,8 +16,47 @@
             margin: 0;
             padding: 0;
             color: #444;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
         
+        /* إعدادات الوضع الداكن */
+        body.dark-mode {
+            background-color: #014551 !important; /* اللون الذي اخترته أنت */
+            color: #ffffff;
+        }
+
+        body.dark-mode .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        body.dark-mode .info h3, body.dark-mode .view-details {
+            color: #ffffff;
+        }
+
+        /* زر الـ Liquid Glass في الشريط العلوي */
+        .theme-toggle-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
         /* أنيميشن ظهور المحتوى */
         @keyframes fadeInPage {
             from { opacity: 0; transform: translateY(10px); }
@@ -134,14 +173,13 @@
             background: #ffffff;
         }
 
-        /* تعديلات الصور - تم حذف الـ blur */
         .img-wrapper img { 
             width: 100%; 
             height: 100%; 
             object-fit: contain; 
             padding: 15px;
             transition: transform 0.5s ease;
-            filter: none; /* تم إلغاء التغبيش */
+            filter: none;
         }
 
         .product-card:hover .img-wrapper img { 
@@ -160,7 +198,6 @@
             font-weight: 600;
         }
 
-        /* تعديلات الموبايل */
         @media (max-width: 576px) {
             .navbar-brand span { font-size: 1.1rem; }
             .img-wrapper { height: 180px; }
@@ -195,7 +232,11 @@
             <span>متجر كنغر</span>
         </a>
 
-        <div class="d-flex gap-3 align-items-center">
+        <div class="d-flex gap-2 align-items-center">
+            <div class="theme-toggle-btn me-2" onclick="toggleTheme()" id="themeBtn">
+                <i class="fas fa-moon"></i>
+            </div>
+            
             <a href="https://wa.me/9647751838313" class="text-white fs-5" target="_blank"><i class="fab fa-whatsapp"></i></a>
             <a href="https://www.instagram.com/kngr_shop" class="text-white fs-5" target="_blank"><i class="fab fa-instagram"></i></a>
             <div class="menu-icon ms-2" onclick="openNav()"><i class="fas fa-bars"></i></div>
@@ -264,6 +305,30 @@
     function closeNav() { 
         document.getElementById("sideMenu").style.width = "0"; 
         document.getElementById("overlay").style.display = "none"; 
+    }
+
+    // وظيفة تبديل الوضع الداكن
+    function toggleTheme() {
+        const body = document.body;
+        const icon = document.querySelector('#themeBtn i');
+        
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            icon.classList.replace('fa-moon', 'fa-sun');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            icon.classList.replace('fa-sun', 'fa-moon');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    // التحقق من الثيم المحفوظ عند التحميل
+    window.onload = () => {
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.querySelector('#themeBtn i').classList.replace('fa-moon', 'fa-sun');
+        }
     }
 </script>
 
