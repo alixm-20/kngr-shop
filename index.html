@@ -19,20 +19,24 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
         
-        /* إعدادات الوضع الداكن */
+        /* إعدادات الوضع الداكن المطور */
         body.dark-mode {
-            background-color: #014551 !important; /* اللون الذي اخترته أنت */
-            color: #ffffff;
+            background-color: #1a1517 !important; /* اللون الفحمي البنفسجي المقترح */
+            color: #efe3e3 !important;
         }
 
         body.dark-mode .product-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.1);
+            background: #251f21; /* أفتح قليلاً من الخلفية لتمييز البطاقة */
+            border-color: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
         }
 
         body.dark-mode .info h3, body.dark-mode .view-details {
             color: #ffffff;
+        }
+
+        body.dark-mode .price {
+            color: #ff6b6b; /* تفتيح لون السعر قليلاً ليبرز في الظلام */
         }
 
         /* زر الـ Liquid Glass في الشريط العلوي */
@@ -179,7 +183,6 @@
             object-fit: contain; 
             padding: 15px;
             transition: transform 0.5s ease;
-            filter: none;
         }
 
         .product-card:hover .img-wrapper img { 
@@ -307,7 +310,6 @@
         document.getElementById("overlay").style.display = "none"; 
     }
 
-    // وظيفة تبديل الوضع الداكن
     function toggleTheme() {
         const body = document.body;
         const icon = document.querySelector('#themeBtn i');
@@ -323,11 +325,11 @@
         }
     }
 
-    // التحقق من الثيم المحفوظ عند التحميل
     window.onload = () => {
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
-            document.querySelector('#themeBtn i').classList.replace('fa-moon', 'fa-sun');
+            const icon = document.querySelector('#themeBtn i');
+            if(icon) icon.classList.replace('fa-moon', 'fa-sun');
         }
     }
 </script>
