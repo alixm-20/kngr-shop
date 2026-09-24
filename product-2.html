@@ -1,110 +1,236 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>تفاصيل المنتج - متجر كنغر</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <style>
-        /* خلفية الموقع الكريمية الدافئة */
-        body { background-color: #efe3e3; font-family: 'Segoe UI', sans-serif; padding-bottom: 50px; }
-        
-        /* زر العودة بلون الهوية العنابي الداكن */
-        .back-link { margin: 20px 0; display: inline-block; color: #694551; text-decoration: none; font-weight: bold; transition: 0.3s; }
-        .back-link:hover { color: #4a3139; transform: translateX(-5px); }
-        
-        /* حاوية المنتج بلمسات الهوية الجديدة */
-        .product-container { background: white; border-radius: 25px; padding: 30px; box-shadow: 0 10px 30px rgba(105, 69, 81, 0.1); border: 1px solid #dcc9c9; }
-        
-        .main-display { width: 100%; border-radius: 20px; margin-bottom: 20px; height: 450px; object-fit: contain; background: #ffffff; border: 1px solid #eee; }
-        
-        .gallery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
-        .gallery-grid img { width: 100%; height: 70px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
-        
-        /* تغيير لون التحديد عند اختيار الصورة */
-        .gallery-grid img:hover { border-color: #694551; }
-        
-        /* لون العنوان والسعر المتوافق مع المتجر */
-        .product-title { color: #694551; font-weight: 800; }
-        .price { color: #e74c3c; font-size: 2rem; font-weight: 800; }
-        
-        /* صندوق طلب البيانات */
-        .order-box { background: #fcf8f8; border-radius: 20px; padding: 25px; margin-top: 25px; border: 1px dashed #dcc9c9; }
-        
-        /* زر الواتساب مع الحفاظ على لونه الأخضر الرسمي وتأثير التفاعل */
-        .btn-whatsapp { background: #25D366; color: white; padding: 15px; border-radius: 15px; width: 100%; border: none; font-weight: bold; font-size: 1.2rem; transition: 0.3s; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2); }
-        .btn-whatsapp:hover { background: #1eb954; transform: translateY(-3px); }
+      /* خلفية الموقع الكريمية الدافئة */
+      body {
+        background-color: #efe3e3;
+        font-family: "Segoe UI", sans-serif;
+        padding-bottom: 50px;
+      }
 
-        /* تنسيق الحقول النصية */
-        .form-control { border-radius: 12px; border: 1px solid #dcc9c9; padding: 12px; }
-        .form-control:focus { border-color: #694551; box-shadow: 0 0 0 0.25rem rgba(105, 69, 81, 0.1); }
+      /* زر العودة بلون الهوية العنابي الداكن */
+      .back-link {
+        margin: 20px 0;
+        display: inline-block;
+        color: #694551;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+      .back-link:hover {
+        color: #4a3139;
+        transform: translateX(-5px);
+      }
 
-        /* منطقة الوصف القابلة للتمرير */
-        .description-scroll { max-height: 250px; overflow-y: auto; padding-left: 10px; }
-        .description-scroll::-webkit-scrollbar { width: 5px; }
-        .description-scroll::-webkit-scrollbar-thumb { background: #dcc9c9; border-radius: 10px; }
+      /* حاوية المنتج بلمسات الهوية الجديدة */
+      .product-container {
+        background: white;
+        border-radius: 25px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(105, 69, 81, 0.1);
+        border: 1px solid #dcc9c9;
+      }
+
+      .main-display {
+        width: 100%;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        height: 450px;
+        object-fit: contain;
+        background: #ffffff;
+        border: 1px solid #eee;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 10px;
+      }
+      .gallery-grid img {
+        width: 100%;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: 0.3s;
+      }
+
+      /* تغيير لون التحديد عند اختيار الصورة */
+      .gallery-grid img:hover {
+        border-color: #694551;
+      }
+
+      /* لون العنوان والسعر المتوافق مع المتجر */
+      .product-title {
+        color: #694551;
+        font-weight: 800;
+      }
+      .price {
+        color: #e74c3c;
+        font-size: 2rem;
+        font-weight: 800;
+      }
+
+      /* صندوق طلب البيانات */
+      .order-box {
+        background: #fcf8f8;
+        border-radius: 20px;
+        padding: 25px;
+        margin-top: 25px;
+        border: 1px dashed #dcc9c9;
+      }
+
+      /* زر الواتساب مع الحفاظ على لونه الأخضر الرسمي وتأثير التفاعل */
+      .btn-whatsapp {
+        background: #25d366;
+        color: white;
+        padding: 15px;
+        border-radius: 15px;
+        width: 100%;
+        border: none;
+        font-weight: bold;
+        font-size: 1.2rem;
+        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+      }
+      .btn-whatsapp:hover {
+        background: #1eb954;
+        transform: translateY(-3px);
+      }
+
+      /* تنسيق الحقول النصية */
+      .form-control {
+        border-radius: 12px;
+        border: 1px solid #dcc9c9;
+        padding: 12px;
+      }
+      .form-control:focus {
+        border-color: #694551;
+        box-shadow: 0 0 0 0.25rem rgba(105, 69, 81, 0.1);
+      }
+
+      /* منطقة الوصف القابلة للتمرير */
+      .description-scroll {
+        max-height: 250px;
+        overflow-y: auto;
+        padding-left: 10px;
+      }
+      .description-scroll::-webkit-scrollbar {
+        width: 5px;
+      }
+      .description-scroll::-webkit-scrollbar-thumb {
+        background: #dcc9c9;
+        border-radius: 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="container">
+      <a href="index.html" class="back-link"
+        ><i class="fas fa-arrow-right"></i> العودة للرئيسية</a
+      >
 
-<div class="container">
-    <a href="index.html" class="back-link"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
-
-    <div class="product-container">
+      <div class="product-container">
         <div class="row">
-            <div class="col-md-6">
-                <img src="teeth.webp" id="mainImage" class="main-display">
-                <div class="gallery-grid">
-                    <img src="teeth.webp" onclick="changeImage('teeth.webp')">
-                    <img src="teeth2.webp" onclick="changeImage('teeth2.webp')">
-                    <img src="teeth3.webp" onclick="changeImage('teeth3.webp')">
-                    <img src="teeth4.webp" onclick="changeImage('teeth4.webp')">
-                    <img src="teeth5.webp" onclick="changeImage('teeth5.webp')">
-                </div>
+          <div class="col-md-6">
+            <img src="teeth.webp" id="mainImage" class="main-display" />
+            <div class="gallery-grid">
+              <img src="teeth.webp" onclick="changeImage('teeth.webp')" />
+              <img src="teeth2.webp" onclick="changeImage('teeth2.webp')" />
+              <img src="teeth3.webp" onclick="changeImage('teeth3.webp')" />
+              <img src="teeth4.webp" onclick="changeImage('teeth4.webp')" />
+              <img src="teeth5.webp" onclick="changeImage('teeth5.webp')" />
             </div>
-            <div class="col-md-6">
-                <h1 class="product-title fw-bold">قلم مبيض الاسنان الفوري 2 قطعة</h1>
-                <div class="price my-4">16,000 د.ع</div>
-                
-                <div class="description-scroll text-muted mb-4">
-                    <h6 class="fw-bold text-dark">الاستخدامات:</h6>
-                    <p>تصميم مبتكر لتبييض الأسنان بسرعة وسهولة في المنزل، مثالي لتحسين لون الأسنان بفعالية.</p>
-                    
-                    <h6 class="fw-bold text-dark">المميزات:</h6>
-                    <p>تركيبة آمنة لا تسبب تهيج اللثة، نتائج سريعة دون الحاجة لزيارات العيادة المكلفة.</p>
-                    
-                    <h6 class="fw-bold text-dark">طريقة الاستعمال:</h6>
-                    <p>1. تأكد من نظافة الأسنان وجفافها.<br>
-                    2. طبق الجل بحركات دائرية.<br>
-                    3. اتركه لدقائق ثم اشطفه بالماء.</p>
-                </div>
-                
-                <div class="order-box">
-                    <h5 class="mb-3 fw-bold" style="color: #694551;">أدخل معلوماتك لإتمام الطلب:</h5>
-                    <input type="text" id="custName" class="form-control mb-3" placeholder="الاسم الكامل">
-                    <input type="text" id="custAddress" class="form-control mb-3" placeholder="المحافظة والمنطقة">
-                    <input type="tel" id="custPhone" class="form-control mb-3" placeholder="رقم الهاتف">
-                    <button class="btn-whatsapp" onclick="sendWhatsApp()">اطلب الآن عبر واتساب ✅</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+          </div>
+          <div class="col-md-6">
+            <h1 class="product-title fw-bold">
+              قلم مبيض الاسنان الفوري 2 قطعة
+            </h1>
+            <div class="price my-4">16,000 د.ع</div>
 
-<script>
-    function changeImage(src) { document.getElementById('mainImage').src = src; }
-    function sendWhatsApp() {
-        const name = document.getElementById('custName').value;
-        const addr = document.getElementById('custAddress').value;
-        const phone = document.getElementById('custPhone').value;
+            <div class="description-scroll text-muted mb-4">
+              <h6 class="fw-bold text-dark">الاستخدامات:</h6>
+              <p>
+                تصميم مبتكر لتبييض الأسنان بسرعة وسهولة في المنزل، مثالي لتحسين
+                لون الأسنان بفعالية.
+              </p>
+
+              <h6 class="fw-bold text-dark">المميزات:</h6>
+              <p>
+                تركيبة آمنة لا تسبب تهيج اللثة، نتائج سريعة دون الحاجة لزيارات
+                العيادة المكلفة.
+              </p>
+
+              <h6 class="fw-bold text-dark">طريقة الاستعمال:</h6>
+              <p>
+                1. تأكد من نظافة الأسنان وجفافها.<br />
+                2. طبق الجل بحركات دائرية.<br />
+                3. اتركه لدقائق ثم اشطفه بالماء.
+              </p>
+            </div>
+
+            <div class="order-box">
+              <h5 class="mb-3 fw-bold" style="color: #694551">
+                أدخل معلوماتك لإتمام الطلب:
+              </h5>
+              <input
+                type="text"
+                id="custName"
+                class="form-control mb-3"
+                placeholder="الاسم الكامل"
+              />
+              <input
+                type="text"
+                id="custAddress"
+                class="form-control mb-3"
+                placeholder="المحافظة والمنطقة"
+              />
+              <input
+                type="tel"
+                id="custPhone"
+                class="form-control mb-3"
+                placeholder="رقم الهاتف"
+              />
+              <button class="btn-whatsapp" onclick="sendWhatsApp()">
+                اطلب الآن عبر واتساب ✅
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function changeImage(src) {
+        document.getElementById("mainImage").src = src;
+      }
+      function sendWhatsApp() {
+        const name = document.getElementById("custName").value;
+        const addr = document.getElementById("custAddress").value;
+        const phone = document.getElementById("custPhone").value;
         const whatsapp = "9647751838313";
 
-        if(!name || !addr || !phone) { alert("لطفاً، أكمل جميع البيانات"); return; }
+        if (!name || !addr || !phone) {
+          alert("لطفاً، أكمل جميع البيانات");
+          return;
+        }
 
         const message = `*طلب جديد من متجر كنغر*%0A*المنتج:* قلم مبيض الاسنان (قطعتين)%0A*الاسم:* ${name}%0A*العنوان:* ${addr}%0A*الهاتف:* ${phone}`;
-        window.open(`https://wa.me/${whatsapp}?text=${message}`, '_blank');
-    }
-</script>
-</body>
+        window.open(`https://wa.me/${whatsapp}?text=${message}`, "_blank");
+      }
+    </script>
+  </body>
 </html>
